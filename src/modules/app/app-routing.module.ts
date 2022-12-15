@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AssetViewerComponent} from '../edc-demo/components/asset-viewer/asset-viewer.component';
 import {CatalogBrowserComponent} from '../edc-demo/components/catalog-browser/catalog-browser.component';
+import {SelfDescriptionBrowserComponent} from '../edc4aas/components/self-description-browser/self-description-browser.component';
 import {IntroductionComponent} from '../edc-demo/components/introduction/introduction.component';
 import {
   ContractDefinitionViewerComponent
@@ -32,6 +33,11 @@ export const routes: Routes = [
     path: 'transfer-history',
     component: TransferHistoryViewerComponent,
     data: {title: 'Transfer History', icon: 'assignment'}
+  },
+  {
+    path: 'self-description',
+    component: SelfDescriptionBrowserComponent,
+    data: {title: 'Self Descriptions', icon: 'assignment'}
   },
   {
     path: 'contract-definitions',
