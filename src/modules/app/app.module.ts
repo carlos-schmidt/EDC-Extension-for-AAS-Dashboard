@@ -17,6 +17,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {AppConfigService} from "./app-config.service";
 import {API_KEY, CONNECTOR_CATALOG_API, CONNECTOR_DATAMANAGEMENT_API} from "../edc-dmgmt-client";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {Edc4AasModule} from '../edc4aas/edc4aas.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatIconModule,
     MatListModule,
     EdcDemoModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    Edc4AasModule
   ],
   declarations: [
     AppComponent,
