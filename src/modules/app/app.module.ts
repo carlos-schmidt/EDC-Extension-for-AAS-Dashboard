@@ -15,9 +15,10 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { EdcDemoModule } from '../edc-demo/edc-demo.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { AppConfigService } from "./app-config.service";
-import { API_KEY, CONNECTOR_CATALOG_API, CONNECTOR_DATAMANAGEMENT_API, CONNECTOR_SELF_DESCRIPTION_API } from "../edc-dmgmt-client";
+import { API_KEY, CONNECTOR_CATALOG_API, CONNECTOR_DATAMANAGEMENT_API } from "../edc-dmgmt-client";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { Edc4AasModule } from '../edc4aas/edc4aas.module';
+import { CONNECTOR_SELF_DESCRIPTION_API } from '../edc4aas/variables';
 
 
 @NgModule({
