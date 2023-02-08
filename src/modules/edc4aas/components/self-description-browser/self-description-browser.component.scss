@@ -7,8 +7,12 @@
   justify-content: space-between;
 }
 
-.mat-divider {
-  width: 10px;
+.mat-line {
+  font-size: 0.95em;
+}
+
+.mat-card {
+  margin: 1em // between self description cards
 }
 
 .mat-expansion-panel {

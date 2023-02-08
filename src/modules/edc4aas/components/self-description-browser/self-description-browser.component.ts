@@ -45,14 +45,9 @@ export class SelfDescriptionBrowserComponent implements OnInit {
 
   async onSearch() {
     if (await this.checkLink(`${this.searchText}`)) {
-      const selfDescriptions = this.fetch$
-        .pipe(
-          switchMap(() => {
-            return this.httpClient.get<Array<SelfDescription>>(`${this.searchText}`);
-          }));
-      this.selfDescriptionContainers$?.add(new SelfDescriptionContainer(selfDescriptions, new URL(this.searchText)));
+      this.selfDescriptionContainers$?.add(this.selfDescriptionService.getAllSelfDescriptions(this.provider, this.defaultHeaders));
     } else {
-      alert("URL not responding")
+      alert("URL not responding");
     }
   }
 
@@ -75,12 +70,12 @@ export class SelfDescriptionBrowserComponent implements OnInit {
     this.reroute("/my-assets");
   }
 
-  // TODO use this to navigate to assetEdit / negotiate pages
   reroute(site: string) {
     this.router.navigateByUrl(site);
+    // TODO how do i pass element info to other sites?
   }
 
-  checkLink = async (url: string) => (await fetch(url)).ok
+  checkLink = async (url: string) => (await fetch(url)).ok;
 
 }
 

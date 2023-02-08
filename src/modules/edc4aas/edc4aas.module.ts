@@ -20,6 +20,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatListModule} from '@angular/material/list';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SelfDescriptionBrowserComponent} from './components/self-description-browser/self-description-browser.component';
+import {ElementCollectionTemplate} from './components/self-description-browser/template/element-collection-template.component';
 
 @NgModule({
   imports: [
@@ -46,10 +47,12 @@ import {SelfDescriptionBrowserComponent} from './components/self-description-bro
     MatListModule,
   ],
   declarations: [
-    SelfDescriptionBrowserComponent
+    SelfDescriptionBrowserComponent,
+    ElementCollectionTemplate
   ],
   exports: [
-    SelfDescriptionBrowserComponent
+    SelfDescriptionBrowserComponent,
+    ElementCollectionTemplate
   ]
 })
 export class Edc4AasModule {
