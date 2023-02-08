@@ -35,11 +35,6 @@ export const routes: Routes = [
     data: {title: 'Transfer History', icon: 'assignment'}
   },
   {
-    path: 'self-description',
-    component: SelfDescriptionBrowserComponent,
-    data: {title: 'Self Descriptions', icon: 'assignment'}
-  },
-  {
     path: 'contract-definitions',
     component: ContractDefinitionViewerComponent,
     data: {title: 'Contract Definitions', icon: 'rule'}
@@ -53,6 +48,11 @@ export const routes: Routes = [
     path: 'my-assets', // must not be "assets" to prevent conflict with assets directory
     component: AssetViewerComponent,
     data: {title: 'Assets', icon: 'upload'}
+  },
+  {
+    path: 'self-description',
+    component: SelfDescriptionBrowserComponent,
+    data: {title: 'Self Descriptions', icon: 'assignment'}
   },
   {
     path: '', redirectTo: 'introduction', pathMatch: 'full'
