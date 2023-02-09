@@ -20,7 +20,6 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { Edc4AasModule } from '../edc4aas/edc4aas.module';
 import { CONNECTOR_SELF_DESCRIPTION_API } from '../edc4aas/variables';
 
-
 @NgModule({
   imports: [
     BrowserModule,
