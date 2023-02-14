@@ -5,8 +5,7 @@ import { Router } from "@angular/router";
 @Component({ selector: 'element-collection', styleUrls: ['../../self-description-browser.component.scss'], templateUrl: './element-collection-template.component.html' })
 
 export class ElementCollectionTemplate implements OnInit {
-  @Input() element: SubmodelElement | undefined;
-  @Input() ownElement: boolean = false;
+  @Input() element?: SubmodelElement;
   @Input() provider?: URL;
   router: Router;
 
@@ -16,13 +15,8 @@ export class ElementCollectionTemplate implements OnInit {
     this.router = router;
   }
 
-  editAsset(element: IdsAssetElement) {
-    alert("Editing asset " + element.idsAssetId + "...");
-    this.router.navigateByUrl("/my-assets");
-  }
-
-  negotiateContract(element: IdsAssetElement, provider: URL) {
-    alert("Switching to negotiation page for element " + element.idsAssetId + " from provider" + provider.toString() + "...");
+  negotiateContract(idsAssetId?: string, provider?: URL) {
+    alert("Switching to negotiation page for element " + idsAssetId + " from provider" + provider?.toString() + "...");
     this.router.navigateByUrl("/contracts");
   }
 }

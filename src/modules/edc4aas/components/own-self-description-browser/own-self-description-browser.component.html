@@ -1,0 +1,53 @@
+<div id="wrapper">
+  <mat-card *ngIf="selfDescriptionContainer$?.selfDescriptions | async as selfDescriptions">
+    <mat-card-content *ngFor="let selfDescription of selfDescriptions" class="self-description-card">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Shells</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card *ngFor="let assetAdministrationShell of selfDescription.assetAdministrationShells"
+          class="aas-element-card">
+          <own-info-view [name]="'AssetAdministrationShell'" [element]="assetAdministrationShell"
+            [id]="assetAdministrationShell.identification"></own-info-view>
+          <mat-icon (click)="editContract(assetAdministrationShell)"
+            title="Edit contract associated with this element">edit</mat-icon>
+        </mat-card>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Submodels</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card *ngFor="let submodel of selfDescription.submodels" class="aas-element-card">
+
+          <own-info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></own-info-view>
+          <mat-icon (click)="editContract(submodel)" title="Edit contract associated with this element">edit</mat-icon>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Submodel Elements ({{submodel.submodelElements?.length}})</mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container *ngFor="let submodelElement of submodel.submodelElements">
+              <own-element-collection [element]="submodelElement"
+                [idsContractId]="submodelElement?.idsContractId"></own-element-collection>
+            </ng-container>
+          </mat-expansion-panel>
+        </mat-card>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Concept Descriptions</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card *ngFor="let conceptDescription of selfDescription.conceptDescriptions" class="aas-element-card">
+          <own-info-view [name]="'ConceptDescription'" [element]="conceptDescription"
+            [id]="conceptDescription.identification"></own-info-view>
+          <mat-icon (click)="editContract(conceptDescription)"
+            title="Edit contract associated with this element">edit</mat-icon>
+        </mat-card>
+      </mat-expansion-panel>
+
+    </mat-card-content>
+
+  </mat-card>
+</div>

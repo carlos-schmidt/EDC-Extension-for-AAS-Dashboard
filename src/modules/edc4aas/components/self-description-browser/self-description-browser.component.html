@@ -10,16 +10,14 @@
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>
-
     <mat-paginator [length]="selfDescriptionContainers$.size" hidePageSize="true"
       pageSize="selfDescriptionContainers$.size">
     </mat-paginator>
-
-    <!-- <button mat-button (click)="onSearch()">Search</button> -->
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="start start">
     <ng-container *ngFor="let selfDescriptionContainer of selfDescriptionContainers$" class="self-description-card">
-      <mat-card *ngIf="selfDescriptionContainer.selfDescriptions | async as selfDescriptions">
+
+      <mat-card *ngIf="selfDescriptionContainer?.selfDescriptions | async as selfDescriptions">
         <mat-card-header class="self-descriptions-header">
           <mat-card-title class="self-description-title">Self Description of {{selfDescriptionContainer.provider}}
           </mat-card-title>
@@ -34,22 +32,10 @@
             </mat-expansion-panel-header>
             <mat-card *ngFor="let assetAdministrationShell of selfDescription.assetAdministrationShells"
               class="aas-element-card">
-              <mat-list>
-                <mat-list-item>
-                  <div class="aas-element-name" mat-line>AssetAdministrationShell "{{assetAdministrationShell.idShort}}"
-                  </div>
-                  <div class="aas-element-div" mat-line>AAS Properties</div>
-                  <div mat-line>identification type: {{assetAdministrationShell.identification.idType}}</div>
-                  <div mat-line>Identifier: {{assetAdministrationShell.identification.id}}</div>
-                  <div class="aas-element-div" mat-line>EDC Properties</div>
-                  <div mat-line>Asset ID: {{assetAdministrationShell.idsAssetId}}</div>
-                  <div mat-line>Contract ID: {{assetAdministrationShell.idsContractId}}</div>
-                </mat-list-item>
-              </mat-list>
-              <mat-icon (click)="editAsset(assetAdministrationShell)"
-                *ngIf="selfDescriptionContainer.provider === this.provider">edit</mat-icon>
+              <own-info-view [name]="'AssetAdministrationShell'" [element]="assetAdministrationShell"
+                [id]="assetAdministrationShell.identification"></own-info-view>
               <mat-icon (click)="negotiateContract(assetAdministrationShell, selfDescriptionContainer.provider)"
-                *ngIf="selfDescriptionContainer.provider !== this.provider">attachment</mat-icon>
+                title="Negotiate contract for this asset">attachment</mat-icon>
             </mat-card>
           </mat-expansion-panel>
 
@@ -58,71 +44,19 @@
               <mat-panel-title>Submodels</mat-panel-title>
             </mat-expansion-panel-header>
             <mat-card *ngFor="let submodel of selfDescription.submodels" class="aas-element-card">
-              <mat-list>
-                <mat-list-item>
-                  <div class="aas-element-name" mat-line>Submodel "{{submodel.idShort}}"
-                  </div>
-                  <div class="aas-element-div" mat-line>AAS Properties</div>
-                  <div mat-line>identification type: {{submodel.identification.idType}}</div>
-                  <div mat-line>Identifier: {{submodel.identification.id}}</div>
-                  <div class="aas-element-div" mat-line>EDC Properties</div>
-                  <div mat-line>Asset ID: {{submodel.idsAssetId}}</div>
-                  <div mat-line>Contract ID: {{submodel.idsContractId}}</div>
-                </mat-list-item>
-              </mat-list>
-              <mat-icon (click)="editAsset(submodel)"
-                *ngIf="selfDescriptionContainer.provider === this.provider">edit</mat-icon>
-              <mat-icon (click)="negotiateContract(submodel, selfDescriptionContainer.provider)"
-                *ngIf="selfDescriptionContainer.provider !== this.provider">attachment</mat-icon>
+
+              <own-info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></own-info-view>
+              <mat-icon (click)="negotiateContract(submodel, selfDescriptionContainer.provider)" title="Negotiate contract for this asset">attachment</mat-icon>
+
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                  <mat-panel-title>Submodel Elements</mat-panel-title>
+                  <mat-panel-title>Submodel Elements ({{submodel.submodelElements?.length}})</mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-card *ngFor="let submodelElement of submodel.submodelElements" class="aas-submodel-element-card">
-
-                  <div class="aas-element-div" mat-line>AAS Properties</div>
-                  <div mat-line>idShort: {{submodelElement?.idShort}}</div>
-                  <div class="aas-element-div" mat-line>EDC Properties</div>
-                  <div mat-line>Asset ID: {{submodelElement?.idsAssetId}}</div>
-                  <div mat-line>Contract ID: {{submodelElement?.idsContractId}}</div>
-
-                  <div *ngIf="submodelElement?.value" class="aas-element-name" mat-line>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>Submodel Elements</mat-panel-title>
-                      </mat-expansion-panel-header>
-                      <mat-card *ngFor="let submodelElement of submodelElement?.value" class="aas-element-card">
-                        <div class="aas-element-div" mat-line>AAS Properties</div>
-                        <div mat-line>IdShort: {{submodelElement?.idShort}}</div>
-                        <div class="aas-element-div" mat-line>EDC Properties</div>
-                        <div mat-line>Asset ID: {{submodelElement?.idsAssetId}}</div>
-                        <div mat-line>Contract ID: {{submodelElement?.idsContractId}}</div>
-                        <div class="aas-element-div" mat-line>EDC Properties</div>
-                        <element-collection [element]="submodelElement"
-                          [ownElement]="selfDescriptionContainer.provider.toString() === this.provider.toString()"
-                          [provider]="selfDescriptionContainer.provider"
-                          *ngFor="let submodelElement of submodelElement.value"></element-collection>
-
-                        <ng-container *ngIf="selfDescriptionContainer.provider.toString() === this.provider.toString()">
-                          <mat-icon (click)="editAsset(submodelElement)">edit</mat-icon>
-                        </ng-container>
-                        <ng-container *ngIf="selfDescriptionContainer.provider.toString() !== this.provider.toString()">
-                          <mat-icon (click)="negotiateContract(submodelElement, provider)">attachment</mat-icon>
-                        </ng-container>
-                      </mat-card>
-                    </mat-expansion-panel>
-                  </div>
-
-                  <ng-container *ngIf="selfDescriptionContainer.provider.toString() === this.provider.toString()">
-                    <mat-icon (click)="editAsset(submodelElement)">edit</mat-icon>
-                  </ng-container>
-                  <ng-container *ngIf="selfDescriptionContainer.provider.toString() !== this.provider.toString()">
-                    <mat-icon (click)="negotiateContract(submodelElement, provider)">attachment</mat-icon>
-                  </ng-container>
-
-                </mat-card>
+                <ng-container *ngFor="let submodelElement of submodel.submodelElements">
+                  <own-element-collection [element]="submodelElement"
+                    [idsContractId]="submodelElement?.idsContractId"></own-element-collection>
+                </ng-container>
               </mat-expansion-panel>
-
             </mat-card>
           </mat-expansion-panel>
 
@@ -131,31 +65,17 @@
               <mat-panel-title>Concept Descriptions</mat-panel-title>
             </mat-expansion-panel-header>
             <mat-card *ngFor="let conceptDescription of selfDescription.conceptDescriptions" class="aas-element-card">
-              <mat-list>
-                <mat-list-item>
-                  <div class="AASElement" mat-line>ConceptDescription
-                    "{{conceptDescription.idShort}}"</div>
-                  <div class="aas-element-div" mat-line>AAS Properties</div>
-                  <div mat-line>idShort: {{conceptDescription.idShort}}</div>
-                  <div mat-line>identification type:
-                    {{conceptDescription.identification.idType}}
-                  </div>
-                  <div mat-line>Identifier: {{conceptDescription.identification.id}}</div>
-                  <div class="aas-element-div" mat-line>EDC Properties</div>
-                  <div mat-line>Asset ID: {{conceptDescription.idsAssetId}}</div>
-                  <div mat-line>Contract ID: {{conceptDescription.idsContractId}}</div>
-                </mat-list-item>
-                <mat-icon (click)="editAsset(conceptDescription)"
-                  *ngIf="selfDescriptionContainer.provider === this.provider">edit</mat-icon>
-                <mat-icon (click)="negotiateContract(conceptDescription, selfDescriptionContainer.provider)"
-                  *ngIf="selfDescriptionContainer.provider !== this.provider">attachment</mat-icon>
-              </mat-list>
+              <own-info-view [name]="'ConceptDescription'" [element]="conceptDescription"
+                [id]="conceptDescription.identification"></own-info-view>
+              <mat-icon (click)="negotiateContract(conceptDescription, selfDescriptionContainer.provider)"
+                title="Negotiate contract for this asset">attachment</mat-icon>
             </mat-card>
           </mat-expansion-panel>
 
         </mat-card-content>
 
       </mat-card>
+
     </ng-container>
 
   </div>

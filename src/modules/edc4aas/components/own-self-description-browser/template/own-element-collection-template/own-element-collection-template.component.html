@@ -1,0 +1,19 @@
+<mat-card class="aas-submodel-element-card">
+
+  <ng-container *ngIf="element?.value"> <own-info-view [name]="'SubmodelElementCollection'"
+      [element]="element"></own-info-view>
+  </ng-container>
+  <ng-container *ngIf="!element?.value"> <own-info-view [name]="'SubmodelElement'" [element]="element"></own-info-view>
+  </ng-container>
+  <mat-icon (click)="editContract(idsContractId)" title="Edit contract associated with this element">edit</mat-icon>
+
+  <div *ngIf="element?.value" class="aas-element-name" mat-line>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Nested Submodel Elements ({{element?.value?.length}})</mat-panel-title>
+      </mat-expansion-panel-header>
+      <own-element-collection [element]="submodelElement" [idsContractId]="submodelElement?.idsContractId"
+        *ngFor="let submodelElement of element?.value"></own-element-collection>
+    </mat-expansion-panel>
+  </div>
+</mat-card>

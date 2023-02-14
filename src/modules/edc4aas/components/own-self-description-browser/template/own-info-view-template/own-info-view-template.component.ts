@@ -5,9 +5,9 @@ import { AssetAdministrationShell } from "src/modules/edc4aas/models/shell";
 import { Submodel } from "src/modules/edc4aas/models/submodel";
 import { SubmodelElement } from "src/modules/edc4aas/models/submodel-element";
 
-@Component({ selector: 'element-collection', styleUrls: ['../../self-description-browser.component.scss'], templateUrl: './info-view-template.component.html' })
+@Component({ selector: 'own-info-view', styleUrls: ['../../own-self-description-browser.component.scss'], templateUrl: './own-info-view-template.component.html' })
 
-export class InfoViewTemplate implements OnInit {
+export class OwnInfoViewTemplate implements OnInit {
 
   @Input() element?: Submodel | SubmodelElement | AssetAdministrationShell | ConceptDescription;
   @Input() id?: Identification;
