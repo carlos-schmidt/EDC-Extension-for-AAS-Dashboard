@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { IdsAssetElement } from "src/modules/edc4aas/models/ids-asset-element";
-import { SubmodelElement } from "src/modules/edc4aas/models/submodel-element";
 import { Router } from "@angular/router";
+import { SubmodelElement } from "src/modules/edc4aas/models/submodel-element";
 @Component({ selector: 'element-collection', styleUrls: ['../../self-description-browser.component.scss'], templateUrl: './element-collection-template.component.html' })
 
 export class ElementCollectionTemplate implements OnInit {

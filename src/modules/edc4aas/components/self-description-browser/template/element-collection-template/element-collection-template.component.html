@@ -1,20 +1,18 @@
-<mat-card *ngFor="let submodelElement of element?.value" class="aas-submodel-element-card">
+<mat-card class="aas-submodel-element-card">
 
-  <div class="aas-element-div" mat-line>AAS Properties</div>
-  <div mat-line>idShort: {{submodelElement?.idShort}}</div>
-  <div class="aas-element-div" mat-line>EDC Properties</div>
-  <div mat-line>Asset ID: {{submodelElement?.idsAssetId}}</div>
-  <div mat-line>Contract ID: {{submodelElement?.idsContractId}}</div>
+  <info-view *ngIf="element?.value" [name]="'SubmodelElementCollection'" [element]="element"></info-view>
+  <info-view *ngIf="!element?.value" [name]="'SubmodelElement'" [element]="element"></info-view>
 
-  <div *ngIf="submodelElement?.value" class="aas-element-name" mat-line>
+  <mat-icon (click)="negotiateContract(element?.idsAssetId, provider)" title="Negotiate contract associated with this element and provider">attachment</mat-icon>
+
+  <div *ngIf="element?.value" class="aas-element-name" mat-line>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>Submodel Elements</mat-panel-title>
+        <mat-panel-title>Nested Submodel Elements ({{element?.value?.length}})</mat-panel-title>
       </mat-expansion-panel-header>
       <element-collection [element]="submodelElement" [provider]="provider"
-        *ngFor="let element of submodelElement.value"></element-collection>
+      *ngFor="let submodelElement of element?.value"></element-collection>
     </mat-expansion-panel>
   </div>
-
-  <mat-icon (click)="negotiateContract(element?.idsAssetId, provider)">attachment</mat-icon>
 </mat-card>
+
