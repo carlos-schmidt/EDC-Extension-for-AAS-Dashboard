@@ -7,8 +7,8 @@
         </mat-expansion-panel-header>
         <mat-card *ngFor="let assetAdministrationShell of selfDescription.assetAdministrationShells"
           class="aas-element-card">
-          <own-info-view [name]="'AssetAdministrationShell'" [element]="assetAdministrationShell"
-            [id]="assetAdministrationShell.identification"></own-info-view>
+          <info-view [name]="'AssetAdministrationShell'" [element]="assetAdministrationShell"
+            [id]="assetAdministrationShell.identification"></info-view>
           <mat-icon (click)="editContract(assetAdministrationShell)"
             title="Edit contract associated with this element">edit</mat-icon>
         </mat-card>
@@ -20,7 +20,7 @@
         </mat-expansion-panel-header>
         <mat-card *ngFor="let submodel of selfDescription.submodels" class="aas-element-card">
 
-          <own-info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></own-info-view>
+          <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></info-view>
           <mat-icon (click)="editContract(submodel)" title="Edit contract associated with this element">edit</mat-icon>
 
           <mat-expansion-panel>
@@ -40,8 +40,8 @@
           <mat-panel-title>Concept Descriptions</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-card *ngFor="let conceptDescription of selfDescription.conceptDescriptions" class="aas-element-card">
-          <own-info-view [name]="'ConceptDescription'" [element]="conceptDescription"
-            [id]="conceptDescription.identification"></own-info-view>
+          <info-view [name]="'ConceptDescription'" [element]="conceptDescription"
+            [id]="conceptDescription.identification"></info-view>
           <mat-icon (click)="editContract(conceptDescription)"
             title="Edit contract associated with this element">edit</mat-icon>
         </mat-card>

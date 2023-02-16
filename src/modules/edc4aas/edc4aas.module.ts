@@ -21,9 +21,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { OwnSelfDescriptionBrowserComponent } from './components/own-self-description-browser/own-self-description-browser.component';
 import { OwnElementCollectionTemplate } from './components/own-self-description-browser/template/own-element-collection-template/own-element-collection-template.component';
-import { OwnInfoViewTemplate } from './components/own-self-description-browser/template/own-info-view-template/own-info-view-template.component';
-import { SelfDescriptionBrowserComponent } from './components/self-description-browser/self-description-browser.component';
 import { ElementCollectionTemplate } from './components/self-description-browser/template/element-collection-template/element-collection-template.component';
+import { InfoViewTemplate } from './components/template/info-view-template/info-view-template.component';
+import { SelfDescriptionBrowserComponent } from './components/self-description-browser/self-description-browser.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -53,14 +54,14 @@ import { ElementCollectionTemplate } from './components/self-description-browser
     ElementCollectionTemplate,
     OwnSelfDescriptionBrowserComponent,
     OwnElementCollectionTemplate,
-    OwnInfoViewTemplate
+    InfoViewTemplate
   ],
   exports: [
     SelfDescriptionBrowserComponent,
     ElementCollectionTemplate,
     OwnSelfDescriptionBrowserComponent,
     OwnElementCollectionTemplate,
-    OwnInfoViewTemplate
+    InfoViewTemplate
   ]
 })
 export class Edc4AasModule {

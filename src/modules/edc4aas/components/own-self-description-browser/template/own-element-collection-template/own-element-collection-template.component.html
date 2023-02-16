@@ -1,10 +1,8 @@
 <mat-card class="aas-submodel-element-card">
 
-  <ng-container *ngIf="element?.value"> <own-info-view [name]="'SubmodelElementCollection'"
-      [element]="element"></own-info-view>
-  </ng-container>
-  <ng-container *ngIf="!element?.value"> <own-info-view [name]="'SubmodelElement'" [element]="element"></own-info-view>
-  </ng-container>
+  <info-view *ngIf="element?.value" [name]="'SubmodelElementCollection'" [element]="element"></info-view>
+  <info-view *ngIf="!element?.value" [name]="'SubmodelElement'" [element]="element"></info-view>
+
   <mat-icon (click)="editContract(idsContractId)" title="Edit contract associated with this element">edit</mat-icon>
 
   <div *ngIf="element?.value" class="aas-element-name" mat-line>
