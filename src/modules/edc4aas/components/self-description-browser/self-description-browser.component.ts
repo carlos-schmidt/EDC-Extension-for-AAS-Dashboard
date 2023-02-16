@@ -30,19 +30,19 @@ export class SelfDescriptionBrowserComponent implements OnInit {
     if (configuration) {
       this.configuration = configuration;
     }
-    this.selfDescriptionContainers$ = new Set();
+    this.selfDescriptionContainers$ = selfDescriptionService.getAllSelfDescriptions();
   }
 
   ngOnInit(): void { }
 
   async onSearch() {
     if (await this.checkLink(`${this.searchText}`)) {
-      this.selfDescriptionContainers$.add(this.selfDescriptionService.getAllSelfDescriptions(new URL(this.searchText), this.defaultHeaders));
+      this.selfDescriptionService.addSelfDescriptionForUrl(new URL(this.searchText), this.defaultHeaders);
     } else alert("URL not responding");
   }
 
   async onDelete(selfDescriptionContainer: SelfDescriptionContainer) {
-    this.selfDescriptionContainers$.delete(selfDescriptionContainer);
+    this.selfDescriptionService.removeSelfDescriptionContainer(selfDescriptionContainer);
   }
 
   async negotiateContract(element: IdsAssetElement, provider: URL) {

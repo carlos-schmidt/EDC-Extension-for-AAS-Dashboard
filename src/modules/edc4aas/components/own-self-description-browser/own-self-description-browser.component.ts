@@ -19,10 +19,11 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
   public configuration = new Configuration();
 
   selfDescriptionContainer$?: SelfDescriptionContainer;
+  notFound: boolean = false;
   provider: URL;
+  private selfDescriptionService: SelfDescriptionBrowserService;
 
-  constructor(private selfDescriptionService: SelfDescriptionBrowserService,
-    protected httpClient: HttpClient,
+  constructor(httpClient: HttpClient,
     @Inject(CONNECTOR_SELF_DESCRIPTION_API) provider: URL,
     @Inject(API_KEY) private apiKey: string,
     @Optional() configuration: Configuration,
@@ -31,10 +32,14 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
       this.configuration = configuration;
     }
     this.provider = provider;
+
+    this.selfDescriptionService = new SelfDescriptionBrowserService(httpClient);
   }
 
   ngOnInit(): void {
-    this.selfDescriptionContainer$ = this.selfDescriptionService.getAllSelfDescriptions(this.provider, this.defaultHeaders);
+    this.selfDescriptionService.addSelfDescriptionForUrl(this.provider, this.defaultHeaders);
+    var allSelfDescriptions = this.selfDescriptionService.getAllSelfDescriptions();
+    this.selfDescriptionContainer$ = allSelfDescriptions.values().next().value;
   }
 
   async editContract(element: IdsAssetElement) {

@@ -1,5 +1,5 @@
 <div id="wrapper">
-  <mat-card *ngIf="selfDescriptionContainer$?.selfDescriptions | async as selfDescriptions">
+  <mat-card *ngIf="selfDescriptionContainer$?.selfDescriptions | async as selfDescriptions; else no_self_description">
     <mat-card-content *ngFor="let selfDescription of selfDescriptions" class="self-description-card">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -51,3 +51,5 @@
 
   </mat-card>
 </div>
+
+<ng-template #no_self_description>Placeholder for self description of EDC with URL {{provider}}...</ng-template>

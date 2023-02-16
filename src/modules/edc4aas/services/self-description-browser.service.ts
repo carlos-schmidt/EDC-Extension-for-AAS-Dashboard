@@ -13,11 +13,18 @@ import { SelfDescriptionContainer } from '../models/self-description-container';
 })
 export class SelfDescriptionBrowserService {
   fetch$ = new BehaviorSubject(null);
+  // Save state when switching pages
+  selfDescriptionContainers$: Set<SelfDescriptionContainer>;
 
   constructor(private httpClient: HttpClient) {
+    this.selfDescriptionContainers$ = new Set();
   }
 
-  public getAllSelfDescriptions(url: URL, _headers: HttpHeaders) {
+  public getAllSelfDescriptions() {
+    return this.selfDescriptionContainers$;
+  }
+
+  public addSelfDescriptionForUrl(url: URL, _headers: HttpHeaders) {
     const selfDescriptions = this.fetch$
       .pipe(
         switchMap(() => {
@@ -25,6 +32,11 @@ export class SelfDescriptionBrowserService {
             { headers: _headers });
         }));
 
-    return new SelfDescriptionContainer(selfDescriptions, url);
+    this.selfDescriptionContainers$.add(new SelfDescriptionContainer(selfDescriptions, url));
   }
+
+  public removeSelfDescriptionContainer(selfDescriptionContainer: SelfDescriptionContainer) {
+    return this.selfDescriptionContainers$.delete(selfDescriptionContainer);
+  }
+
 }
