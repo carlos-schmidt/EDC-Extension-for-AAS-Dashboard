@@ -1,0 +1,83 @@
+#wrapper {
+  margin: 20px;
+}
+
+.self-descriptions-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-line {
+  font-size: 0.95em;
+}
+
+.mat-card {
+  margin: 1em // between self description cards
+}
+
+.mat-expansion-panel {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.aas-element-card {
+  width: auto;
+  height: max-content;
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  background-color: #363636;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.mat-list-base.inline-list {
+    display: flex;
+}
+
+.aas-submodel-element-card {
+  width: auto;
+  height: max-content;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  background-color: #474747;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.aas-element-name {
+  font-size: 40px;
+  font-weight: bold !important;
+}
+
+.aas-element-div {
+  border-left: none;
+  border-right: none;
+  font-weight: bold !important;
+}
+
+.main-property-icon {
+  font-size: 12px;
+}
+
+:host ::ng-deep div.mat-expansion-panel-body {
+  padding-left: 0 !important;
+}
+
+.search-form-field {
+  min-width: 200px;
+  width: 30%;
+}
+
+.card-actions {
+  margin-left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.self-description-title {
+  font-weight: bold !important;
+}
+
+mat-paginator {
+  display: inline-block;
+  background-color: transparent;
+}

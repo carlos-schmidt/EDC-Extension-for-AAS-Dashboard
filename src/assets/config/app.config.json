@@ -1,5 +1,6 @@
 {
   "_comment": "This file will be replaced at runtime when deployed to the cloud",
+  "selfDescriptionUrl": "{{selfDescriptionUrl}}",
   "dataManagementApiUrl": "{{dataManagementApiUrl}}",
   "catalogUrl": "{{catalogUrl}}",
   "storageAccount": "{{account}}",
