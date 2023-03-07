@@ -19,7 +19,7 @@
 
       <mat-card *ngIf="selfDescriptionContainer?.selfDescriptions | async as selfDescriptions">
         <mat-card-header class="self-descriptions-header">
-          <mat-card-title class="self-description-title">Self Description of {{selfDescriptionContainer.provider}}
+          <mat-card-title class="self-description-title">AAS(s) of {{selfDescriptionContainer.provider}}
           </mat-card-title>
           <button (click)="onDelete(selfDescriptionContainer)" mat-icon-button matSuffix>
             <mat-icon>close</mat-icon>

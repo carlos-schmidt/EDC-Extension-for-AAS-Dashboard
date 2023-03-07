@@ -13,7 +13,7 @@
   </div>
 
   <mat-card
-    *ngIf="selfDescriptionContainer.selfDescriptions | async as selfDescriptions; else no_self_description">
+    *ngIf="selfDescriptionContainer?.selfDescriptions | async as selfDescriptions; else no_self_description">
     <mat-card-content *ngFor="let selfDescription of selfDescriptions" class="self-description-card">
       <div class="aas-element-div" mat-line>AAS</div>
       <mat-expansion-panel>
