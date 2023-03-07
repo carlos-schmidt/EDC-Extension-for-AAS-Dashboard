@@ -24,7 +24,7 @@ export class SelfDescriptionBrowserService {
     return this.selfDescriptionContainers$;
   }
 
-  public addSelfDescriptionForUrl(url: URL, _headers: HttpHeaders) {
+  public readSelfDescriptions(url: URL, _headers: HttpHeaders) {
     const selfDescriptions = this.fetch$
       .pipe(
         switchMap(() => {

@@ -32,7 +32,7 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selfDescriptionService.addSelfDescriptionForUrl(this.provider, this.defaultHeaders);
+    this.selfDescriptionService.readSelfDescriptions(this.provider, this.defaultHeaders);
     var allSelfDescriptions = this.selfDescriptionService.getAllSelfDescriptions();
     this.selfDescriptionContainer$ = allSelfDescriptions.values().next().value;
   }

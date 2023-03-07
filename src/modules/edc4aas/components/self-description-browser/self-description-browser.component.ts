@@ -31,7 +31,7 @@ export class SelfDescriptionBrowserComponent implements OnInit {
 
   async onSearch() {
     if (await this.checkLink(`${this.searchText}`)) {
-      this.selfDescriptionService.addSelfDescriptionForUrl(new URL(this.searchText), this.defaultHeaders);
+      this.selfDescriptionService.readSelfDescriptions(new URL(this.searchText), this.defaultHeaders);
     } else alert("URL not responding");
   }
 
