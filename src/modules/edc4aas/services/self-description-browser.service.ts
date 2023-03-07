@@ -24,12 +24,11 @@ export class SelfDescriptionBrowserService {
     return this.selfDescriptionContainers$;
   }
 
-  public readSelfDescriptions(url: URL, _headers: HttpHeaders) {
+  public readSelfDescriptions(url: URL) {
     const selfDescriptions = this.fetch$
       .pipe(
         switchMap(() => {
-          return this.httpClient.get<Array<SelfDescription>>(url.toString(),
-            { headers: _headers });
+          return this.httpClient.get<Array<SelfDescription>>(url.toString());
         }));
 
     this.selfDescriptionContainers$.add(new SelfDescriptionContainer(selfDescriptions, url));
