@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { API_KEY } from 'src/modules/edc-dmgmt-client/variables';
+import { EdcApiKeyInterceptor } from 'src/modules/app/edc.apikey.interceptor';
 import { IdsAssetElement } from '../../models/ids-asset-element';
 import { SelfDescriptionContainer } from '../../models/self-description-container';
 import { SelfDescriptionBrowserService } from '../../services/self-description-browser.service';
@@ -14,7 +14,7 @@ import { CONNECTOR_SELF_DESCRIPTION_API } from '../../variables';
 })
 export class OwnSelfDescriptionBrowserComponent implements OnInit {
 
-  public defaultHeaders = new HttpHeaders({ 'X-Api-Key': this.apiKey });
+  public defaultHeaders = new HttpHeaders({ 'X-Api-Key': this.httpInterceptor.apiKey });
 
   selfDescriptionContainer$?: SelfDescriptionContainer;
   notFound: boolean = false;
@@ -23,7 +23,7 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
 
   constructor(httpClient: HttpClient,
     @Inject(CONNECTOR_SELF_DESCRIPTION_API) provider: URL,
-    @Inject(API_KEY) private apiKey: string,
+    @Inject(HTTP_INTERCEPTORS) private httpInterceptor: EdcApiKeyInterceptor,
     private router: Router) {
 
     this.provider = provider;

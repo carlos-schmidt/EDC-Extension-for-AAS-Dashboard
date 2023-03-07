@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { HttpClient, HttpHeaders, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { API_KEY } from 'src/modules/edc-dmgmt-client/variables';
-import { Configuration } from '../../../edc-dmgmt-client/configuration';
+import { EdcApiKeyInterceptor } from 'src/modules/app/edc.apikey.interceptor';
 import { IdsAssetElement } from '../../models/ids-asset-element';
 import { SelfDescriptionContainer } from '../../models/self-description-container';
 import { SelfDescriptionBrowserService } from '../../services/self-description-browser.service';
@@ -15,8 +14,7 @@ import { SelfDescriptionBrowserService } from '../../services/self-description-b
 })
 export class SelfDescriptionBrowserComponent implements OnInit {
 
-  public defaultHeaders = new HttpHeaders({ 'X-Api-Key': this.apiKey });
-  public configuration = new Configuration();
+  public defaultHeaders = new HttpHeaders({ 'X-Api-Key': this.httpInterceptor.apiKey });
 
   selfDescriptionContainers$: Set<SelfDescriptionContainer>;
   fetch$ = new BehaviorSubject(null);
@@ -24,12 +22,8 @@ export class SelfDescriptionBrowserComponent implements OnInit {
 
   constructor(private selfDescriptionService: SelfDescriptionBrowserService,
     protected httpClient: HttpClient,
-    @Inject(API_KEY) private apiKey: string,
-    @Optional() configuration: Configuration,
+    @Inject(HTTP_INTERCEPTORS) private httpInterceptor: EdcApiKeyInterceptor,
     private router: Router) {
-    if (configuration) {
-      this.configuration = configuration;
-    }
     this.selfDescriptionContainers$ = selfDescriptionService.getAllSelfDescriptions();
   }
 
