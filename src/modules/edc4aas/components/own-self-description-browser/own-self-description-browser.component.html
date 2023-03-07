@@ -1,5 +1,19 @@
 <div id="wrapper">
-  <mat-card *ngIf="selfDescriptionContainer$?.selfDescriptions | async as selfDescriptions; else no_self_description">
+  <div>
+    <mat-form-field class="search-form-field" color="accent">
+      <mat-label>Register AAS by URL</mat-label>
+      <input #aasUrl matInput>
+      <button (click)="aasUrl.value=''" *ngIf="aasUrl.value" mat-icon-button matSuffix>
+        <mat-icon>close</mat-icon>
+      </button>
+      <button (click)="registerAAS(aasUrl.value)" *ngIf="aasUrl.value" mat-icon-button matSuffix>
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <mat-card
+    *ngIf="selfDescriptionContainer.selfDescriptions | async as selfDescriptions; else no_self_description">
     <mat-card-content *ngFor="let selfDescription of selfDescriptions" class="self-description-card">
       <div class="aas-element-div" mat-line>AAS</div>
       <mat-expansion-panel>
