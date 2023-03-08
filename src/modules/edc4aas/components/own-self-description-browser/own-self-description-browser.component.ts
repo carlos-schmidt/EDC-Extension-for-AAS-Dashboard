@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IdsAssetElement } from '../../models/ids-asset-element';
@@ -18,6 +18,7 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
   selfDescriptionContainer?: SelfDescriptionContainer;
   notFound: boolean = false;
   provider: URL;
+  private providerNoPath: URL;
   private selfDescriptionService: SelfDescriptionBrowserService;
 
   constructor(private selfDescriptionRegistrationService: SelfDescriptionRegistrationService,
@@ -25,12 +26,14 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
     @Inject(CONNECTOR_SELF_DESCRIPTION_API) provider: URL,
     private router: Router) {
     this.provider = provider;
+    this.providerNoPath = new URL(this.provider.toString().substring(0, new URL(this.provider).pathname.length + 1));
     this.selfDescriptionService = new SelfDescriptionBrowserService(httpClient);
   }
 
   ngOnInit(): void {
     this.updateSelfDescriptionContainer()
   }
+
 
   async editContract(element: IdsAssetElement) {
     // TODO see asset-editor-dialog
@@ -39,22 +42,19 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
   }
 
   async registerAAS(aas: string) {
-    var response = this.selfDescriptionRegistrationService.registerUrl(
-      new URL(new URL(this.provider).protocol + "//" + new URL(this.provider).host),
-      new URL(aas));
-
-    response.forEach(_ => this.updateSelfDescriptionContainer());
+    var sanitized = aas.toLowerCase().replace(" ", "%20");
+    this.selfDescriptionRegistrationService.registerUrl(this.providerNoPath, new URL(sanitized));
+    this.updateSelfDescriptionContainer();
   }
 
-  updateSelfDescriptionContainer() {
+  async updateSelfDescriptionContainer() {
     this.selfDescriptionService.readSelfDescriptions(this.provider);
     var allSelfDescriptions = this.selfDescriptionService.getAllSelfDescriptions();
     this.selfDescriptionContainer = allSelfDescriptions.values().next().value;
   }
 
-  reroute(site: string) {
+  async reroute(site: string) {
     this.router.navigateByUrl(site);
     // TODO how do you pass element info to other sites?
   }
 }
-

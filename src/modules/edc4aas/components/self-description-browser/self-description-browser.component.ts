@@ -26,8 +26,10 @@ export class SelfDescriptionBrowserComponent implements OnInit {
   ngOnInit(): void { }
 
   async onSearch() {
-    if (await this.checkLink(`${this.searchText}`)) {
-      this.selfDescriptionService.readSelfDescriptions(new URL(this.searchText));
+    var sanitized = this.searchText.toLowerCase().replace(" ", "%20");
+
+    if (await this.checkLink(`${sanitized}`)) {
+      this.selfDescriptionService.readSelfDescriptions(new URL(sanitized));
     } else alert("URL not responding");
   }
 
