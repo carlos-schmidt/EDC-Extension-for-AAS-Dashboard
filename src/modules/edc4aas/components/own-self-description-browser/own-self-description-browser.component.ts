@@ -41,10 +41,32 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
     this.reroute("/contract-definitions");
   }
 
-  async registerAAS(aas: string) {
+  async registerAASByUrl(aas: string) {
     var sanitized = aas.toLowerCase().replace(" ", "%20");
     this.selfDescriptionRegistrationService.registerUrl(this.providerNoPath, new URL(sanitized));
     this.updateSelfDescriptionContainer();
+  }
+
+  async registerAASByFile(aasPath: string, aasPort: string, aasConfig: string) {
+    if (!aasConfig) {
+      this._registerAASByFileUsingConfig(aasPath, aasConfig);
+      return;
+    }
+    if (new Number(aasPort)) {
+      this._registerAASByFileUsingPort(aasPath, new Number(aasPort));
+    }
+  }
+
+  private _registerAASByFileUsingConfig(aasPath: string, aasConfig: string) {
+    this.selfDescriptionRegistrationService.registerFileWithConfig(this.providerNoPath, aasPath, aasConfig);
+  }
+
+  private _registerAASByFileUsingPort(aasPath: string, aasPort: Number) {
+    if (aasPort > 65536 || aasPort < 0) {
+      alert("Port not in [0,2^16)");
+      return;
+    }
+    this.selfDescriptionRegistrationService.registerFileWithPort(this.providerNoPath, aasPath, aasPort);
   }
 
   async updateSelfDescriptionContainer() {
