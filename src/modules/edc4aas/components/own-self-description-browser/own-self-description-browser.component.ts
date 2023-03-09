@@ -34,7 +34,6 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
     this.updateSelfDescriptionContainer()
   }
 
-
   async editContract(element: IdsAssetElement) {
     // TODO see asset-editor-dialog
     alert("Navigating to contract page for asset " + element.idsContractId + "... ");
@@ -48,12 +47,15 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
   }
 
   async registerAASByFile(aasPath: string, aasPort: string, aasConfig: string) {
-    if (!aasConfig) {
-      this._registerAASByFileUsingConfig(aasPath, aasConfig);
+    var sanitizedPath = aasPath.replace(/\\/g, "/");
+    var sanitizedConfigPath = aasConfig.replace(/\\/g, "/");
+    console.log(sanitizedPath, sanitizedConfigPath)
+    if (aasConfig && aasConfig !== '') {
+      this._registerAASByFileUsingConfig(sanitizedPath, sanitizedConfigPath);
       return;
     }
     if (new Number(aasPort)) {
-      this._registerAASByFileUsingPort(aasPath, new Number(aasPort));
+      this._registerAASByFileUsingPort(sanitizedPath, new Number(aasPort));
     }
   }
 
