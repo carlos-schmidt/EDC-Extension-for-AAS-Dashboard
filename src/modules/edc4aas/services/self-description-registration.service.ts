@@ -33,7 +33,7 @@ export class SelfDescriptionRegistrationService {
    */
   registerFileWithPort(edcUrl: URL, aasPath: string, aasPort: Number) {
     var requestUrl = edcUrl + "api/environment?environment=" + aasPath + "&port=" + aasPort;
-    return this.httpClient.post(requestUrl, null);
+    return this.httpClient.post(requestUrl, null).subscribe((_) => console.log("Sent post"));
   }
 
   /**
@@ -47,6 +47,6 @@ export class SelfDescriptionRegistrationService {
    */
   registerFileWithConfig(edcUrl: URL, aasPath: string, aasConfigFile: string) {
     var requestUrl = edcUrl + "api/environment?environment=" + aasPath + "&config=" + aasConfigFile;
-    return this.httpClient.post(requestUrl, null);
+    return this.httpClient.post(requestUrl, null).subscribe((_) => console.log("Sent post"));
   }
 }
