@@ -1,0 +1,23 @@
+<div id="wrapper">
+
+  <button (click)="updateConfig()" mat-icon-button matSuffix>
+    Apply Changes
+    <mat-icon>check</mat-icon>
+  </button>
+
+  <mat-list *ngFor="let configValue of config | keyvalue">
+
+    <mat-list-item>
+
+      <mat-card>{{configValue.key}}</mat-card>
+
+      <mat-form-field class="search-form-field" color="accent">
+        <input *ngIf="config" [ngModel]="configValue.value" (ngModelChange)="updateConfigValue(configValue.key, $event)" matInput>
+      </mat-form-field>
+
+    </mat-list-item>
+    <br>
+
+  </mat-list>
+
+</div>
