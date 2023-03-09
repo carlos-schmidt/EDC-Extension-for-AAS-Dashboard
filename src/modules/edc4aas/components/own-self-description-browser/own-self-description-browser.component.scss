@@ -31,7 +31,7 @@
 }
 
 .mat-list-base.inline-list {
-    display: flex;
+  display: flex;
 }
 
 .aas-submodel-element-card {
@@ -64,8 +64,15 @@
 }
 
 .search-form-field {
-  min-width: 200px;
+  padding-left: 5px;
+  min-width: 150px;
   width: 30%;
+}
+
+.number-form-field {
+  padding-left: 5px;
+  min-width: 20px;
+  width: 10%;
 }
 
 .card-actions {
@@ -81,4 +88,8 @@
 mat-paginator {
   display: inline-block;
   background-color: transparent;
+}
+
+.mat-expansion-panel-body {
+  margin-left: 5px;
 }

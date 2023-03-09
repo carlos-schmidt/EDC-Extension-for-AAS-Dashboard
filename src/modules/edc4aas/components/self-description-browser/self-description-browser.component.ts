@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { EdcApiKeyInterceptor } from 'src/modules/app/edc.apikey.interceptor';
 import { IdsAssetElement } from '../../models/ids-asset-element';
 import { SelfDescriptionContainer } from '../../models/self-description-container';
 import { SelfDescriptionBrowserService } from '../../services/self-description-browser.service';
@@ -14,15 +13,12 @@ import { SelfDescriptionBrowserService } from '../../services/self-description-b
 })
 export class SelfDescriptionBrowserComponent implements OnInit {
 
-  public defaultHeaders = new HttpHeaders({ 'X-Api-Key': this.httpInterceptor.apiKey });
-
   selfDescriptionContainers$: Set<SelfDescriptionContainer>;
   fetch$ = new BehaviorSubject(null);
   searchText = '';
 
   constructor(private selfDescriptionService: SelfDescriptionBrowserService,
     protected httpClient: HttpClient,
-    @Inject(HTTP_INTERCEPTORS) private httpInterceptor: EdcApiKeyInterceptor,
     private router: Router) {
     this.selfDescriptionContainers$ = selfDescriptionService.getAllSelfDescriptions();
   }
@@ -30,8 +26,10 @@ export class SelfDescriptionBrowserComponent implements OnInit {
   ngOnInit(): void { }
 
   async onSearch() {
-    if (await this.checkLink(`${this.searchText}`)) {
-      this.selfDescriptionService.addSelfDescriptionForUrl(new URL(this.searchText), this.defaultHeaders);
+    var sanitized = this.searchText.toLowerCase().replace(" ", "%20");
+
+    if (await this.checkLink(`${sanitized}`)) {
+      this.selfDescriptionService.readSelfDescriptions(new URL(sanitized));
     } else alert("URL not responding");
   }
 
