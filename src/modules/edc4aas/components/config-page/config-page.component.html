@@ -1,23 +1,27 @@
 <div id="wrapper">
 
-  <button (click)="updateConfig()" mat-icon-button matSuffix>
-    Apply Changes
+  <button class="updateButton" (click)="updateConfig()" mat-raised-button matSuffix>
     <mat-icon>check</mat-icon>
+    Apply Changes
   </button>
+  <br>
+  <br>
+  <br>
+  <ng-container *ngIf="config">
 
-  <mat-list *ngFor="let configValue of config | keyvalue">
+    <ng-container *ngFor="let item of config | keyvalue">
 
-    <mat-list-item>
+      <div class="horizontal">
+        <mat-card class="height-restriction">{{item.key}}</mat-card>
 
-      <mat-card>{{configValue.key}}</mat-card>
+        <mat-form-field color="accent">
+          <input class="height-restriction" ngModel="{{item.value}}"
+            (ngModelChange)="updateConfigValue(item.key, $event)" matInput>
+        </mat-form-field>
+      </div>
+      <div></div>
 
-      <mat-form-field class="search-form-field" color="accent">
-        <input *ngIf="config" [ngModel]="configValue.value" (ngModelChange)="updateConfigValue(configValue.key, $event)" matInput>
-      </mat-form-field>
+    </ng-container>
 
-    </mat-list-item>
-    <br>
-
-  </mat-list>
-
+  </ng-container>
 </div>

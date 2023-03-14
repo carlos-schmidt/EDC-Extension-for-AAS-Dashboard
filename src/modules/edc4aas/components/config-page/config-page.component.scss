@@ -2,19 +2,11 @@
   float: left;
 }
 
-::ng-deep .mat-list-item {
-  padding: 10px;
-  align-items: center;
+.horizontal {
+  display: inline-flex;
+  margin-left: 5%;
 }
 
-::ng-deep .mat-card {
-  height: 10px;
-  width: 30%;
-  align-self: center;
-
-}
-
-::ng-deep .search-form-field {
-  min-width: 100px;
-  width: 30%;
+.height-restriction {
+  height:min-content;
 }
