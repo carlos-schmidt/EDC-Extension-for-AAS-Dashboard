@@ -61,10 +61,9 @@ export const routes: Routes = [
     component: SelfDescriptionBrowserComponent,
     data: { title: 'Access Remote AAS', icon: 'assignment' }
   },
-  {
-    path: 'client',
-    component: ClientPageComponent,
-    data: { title: 'Automated Negotiation', icon: 'assignment' }
+  { path: 'client/:1/:2',
+  component: ClientPageComponent,
+   data: { title: 'Automated Negotiation', icon: 'android' }
   },
   {
     path: '', redirectTo: 'introduction', pathMatch: 'full'
