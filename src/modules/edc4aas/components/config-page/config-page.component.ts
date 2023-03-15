@@ -9,7 +9,7 @@ import { CONNECTOR_SELF_DESCRIPTION_API } from "../../variables";
 })
 export class ConfigPageComponent implements OnInit {
 
-  config: Map<string, string>;
+  config?: Map<string, string>;
   provider: URL;
   private providerNoPath: URL;
 
@@ -17,12 +17,10 @@ export class ConfigPageComponent implements OnInit {
     @Inject(CONNECTOR_SELF_DESCRIPTION_API) provider: URL) {
     this.provider = provider;
     this.providerNoPath = new URL(provider.toString().substring(0, new URL(provider).pathname.length + 1));
-    this.config = this.edc4AASConfigService.getConfig(this.providerNoPath);
   }
 
   public ngOnInit() {
-    this.providerNoPath = new URL(this.provider.toString().substring(0, new URL(this.provider).pathname.length + 1));
-    this.config = this.edc4AASConfigService.getConfig(this.providerNoPath);
+    this.edc4AASConfigService.getConfig(this.providerNoPath).subscribe((data) => this.config = new Map(Object.entries(data)));;
   }
 
   public updateConfig() {
@@ -32,11 +30,23 @@ export class ConfigPageComponent implements OnInit {
 
   // GUI update function
   async updateConfigValue(key: string, newValue: any) {
-    console.log(newValue);
-    this.config.set(key, newValue);
+    this.config?.set(key, newValue);
   }
 
   trackByFn(index: any, _item: any) {
     return index;
+  }
+
+  isBool(value: any) {
+    console.log(value === "true" || value === "false")
+    return value === "true" || value === "false";
+  }
+  toggle(key: string) {
+    if (this.config?.get(key) === "true") {
+      this.config.set(key, "false");
+    }
+    else if (this.config?.get(key) === "false") {
+      this.config?.set(key, "true");
+    }
   }
 }
