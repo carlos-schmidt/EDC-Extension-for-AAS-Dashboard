@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
 import { EDC4AASConfigService } from "../../services/edc4aas-config.service";
 import { CONNECTOR_SELF_DESCRIPTION_API } from "../../variables";
 
@@ -34,7 +33,10 @@ export class ConfigPageComponent implements OnInit {
   // GUI update function
   async updateConfigValue(key: string, newValue: any) {
     console.log(newValue);
-    this.config.set(key, newValue); // TODO why does the input field keep going out of focus on input
+    this.config.set(key, newValue);
   }
 
+  trackByFn(index: any, _item: any) {
+    return index;
+  }
 }
