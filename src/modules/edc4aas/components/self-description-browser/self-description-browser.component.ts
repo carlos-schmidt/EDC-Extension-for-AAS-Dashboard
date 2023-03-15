@@ -26,7 +26,7 @@ export class SelfDescriptionBrowserComponent implements OnInit {
   ngOnInit(): void { }
 
   async onSearch() {
-    var sanitized = this.searchText.toLowerCase().replace(" ", "%20");
+    var sanitized = this.searchText.replace(" ", "%20");
 
     if (await this.checkLink(`${sanitized}`)) {
       this.selfDescriptionService.readSelfDescriptions(new URL(sanitized));
@@ -40,8 +40,8 @@ export class SelfDescriptionBrowserComponent implements OnInit {
   async negotiateContract(element: IdsAssetElement, provider: URL) {
     // TODO see asset-negotiator-dialog
     console.log(element, provider);
-    alert("negotiate asset " + element.idsAssetId + " from " + provider.toString());
-    this.reroute("/contracts");
+    //alert("negotiate asset " + element.idsAssetId + " from " + provider.toString());
+    this.router.navigate(["/client", element.idsAssetId, provider.toString()]);
   }
 
   reroute(site: string) {
