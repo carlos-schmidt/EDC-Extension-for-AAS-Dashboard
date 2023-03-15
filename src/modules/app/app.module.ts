@@ -23,7 +23,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { AppConfigService } from "./app-config.service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { Edc4AasModule } from '../edc4aas/edc4aas.module';
-import { CONNECTOR_SELF_DESCRIPTION_API } from '../edc4aas/variables';
+import { CONNECTOR_DEFAULT_API, CONNECTOR_SELF_DESCRIPTION_API } from '../edc4aas/variables';
 
 @NgModule({
   imports: [
@@ -60,6 +60,11 @@ import { CONNECTOR_SELF_DESCRIPTION_API } from '../edc4aas/variables';
     {
       provide: CONNECTOR_SELF_DESCRIPTION_API,
       useFactory: (s: AppConfigService) => s.getConfig()?.selfDescriptionUrl,
+      deps: [AppConfigService]
+    },
+    {
+      provide: CONNECTOR_DEFAULT_API,
+      useFactory: (s: AppConfigService) => s.getConfig()?.defaultApiUrl,
       deps: [AppConfigService]
     },
     {
