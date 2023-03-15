@@ -6,20 +6,18 @@
   </button>
   <br>
   <br>
-  <br>
   <ng-container *ngIf="config">
 
-    <ng-container *ngFor="let item of config | keyvalue">
+    <ng-container *ngFor="let item of config | keyvalue; trackBy: trackByFn">
 
       <div class="horizontal">
-        <mat-card class="height-restriction">{{item.key}}</mat-card>
+        <mat-card class="key-label">{{item.key}}</mat-card>
 
-        <mat-form-field color="accent">
-          <input class="height-restriction" ngModel="{{item.value}}"
-            (ngModelChange)="updateConfigValue(item.key, $event)" matInput>
+        <mat-form-field class="value-input" color="accent">
+          <input ngModel="{{item.value}}" (ngModelChange)="updateConfigValue(item.key, $event)" matInput>
         </mat-form-field>
       </div>
-      <div></div>
+      <br>
 
     </ng-container>
 

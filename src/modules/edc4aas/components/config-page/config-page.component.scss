@@ -1,12 +1,15 @@
-.side-by-side {
-  float: left;
-}
-
 .horizontal {
   display: inline-flex;
   margin-left: 5%;
 }
 
-.height-restriction {
-  height:min-content;
+.key-label {
+  width: 20em;
+  height: min-content;
+
+}
+
+.value-input {
+  width: 20em;
+  height: min-content;
 }
