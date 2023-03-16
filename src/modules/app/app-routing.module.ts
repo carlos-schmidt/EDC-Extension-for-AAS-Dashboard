@@ -11,6 +11,7 @@ import { PolicyViewComponent } from "../edc-demo/components/policy-view/policy-v
 import {
   TransferHistoryViewerComponent
 } from '../edc-demo/components/transfer-history/transfer-history-viewer.component';
+import { ConfigPageComponent } from '../edc4aas/components/config-page/config-page.component';
 import { OwnSelfDescriptionBrowserComponent } from '../edc4aas/components/own-self-description-browser/own-self-description-browser.component';
 import { SelfDescriptionBrowserComponent } from '../edc4aas/components/self-description-browser/self-description-browser.component';
 
@@ -59,6 +60,11 @@ export const routes: Routes = [
     path: 'aas',
     component: SelfDescriptionBrowserComponent,
     data: { title: 'Access Remote AAS', icon: 'assignment' }
+  },
+  {
+    path: 'config',
+    component: ConfigPageComponent,
+    data: { title: 'Configuration', icon: 'assignment' }
   },
   {
     path: '', redirectTo: 'introduction', pathMatch: 'full'

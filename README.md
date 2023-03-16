@@ -1,5 +1,17 @@
 # EDC Data Dashboard
 
+## Usage with EDC4AAS Extension
+
+The following fields could be required for the connection of the dashboard with the EDC4AAS Extension:
+
+```properties
+edc.web.rest.cors.enabled = true
+edc.web.rest.cors.origins = *
+edc.web.rest.cors.headers = x-api-key, content-type
+edc.web.rest.cors.methods = GET, POST, DELETE, PUT, OPTIONS
+```
+
+Also, the default x-api-key of the extension should be set as `password`
 **Please note: This repository does not contain production-grade code and is only intended for demonstration purposes.**
 
 EDC Data Dashboard is a dev frontend application for [EDC Data Management API](https://github.com/eclipse-dataspaceconnector/DataSpaceConnector).
