@@ -26,10 +26,18 @@ export class ClientService {
     return this.httpClient.get<JSON>(requestUrl.toString());
   }
 
+  fetchProviderAcceptableContracts(provider: URL, assetId: string) {
+    var requestUrl = new URL(this.clientUrl.toString().concat("/contractOffers"));
+    requestUrl.searchParams.append("assetId", assetId);
+    requestUrl.searchParams.append("providerUrl", provider.toString());
+
+    return this.httpClient.get<JSON>(requestUrl.toString());
+  }
+
   addAcceptedContract(json: string) {
     var requestUrl = new URL(this.clientUrl.toString().concat("/acceptedContractOffers"));
-    var headers = new HttpHeaders({"Content-Type": "application/json"});
-    return this.httpClient.post<JSON>(requestUrl.toString(), json, {headers});
+    var headers = new HttpHeaders({ "Content-Type": "application/json" });
+    return this.httpClient.post<JSON>(requestUrl.toString(), json, { headers });
   }
 
   public writeDataToHttpEndpoint(provider: URL, assetId: string, url: URL) {

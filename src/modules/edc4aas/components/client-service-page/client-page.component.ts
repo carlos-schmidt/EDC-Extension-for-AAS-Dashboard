@@ -18,8 +18,10 @@ export class ClientPageComponent implements OnInit {
   searching: boolean = false;
   customInput: boolean = false;
   showAccepted: boolean = false;
+  showAcceptableProviderContracts: boolean = false;
 
   accepted?: JSON;
+  providerAcceptableForAsset?: JSON;
   newAccepted?: string;
 
   constructor(private clientService: ClientService, private route: ActivatedRoute, private ref: ApplicationRef) {
@@ -65,6 +67,18 @@ export class ClientPageComponent implements OnInit {
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });
+    }
+  }
+
+  async fetchProviderAcceptableContracts() {
+    if (this.providerUrl && this.assetId) {
+      this.searching = true;
+      this.clientService
+        .fetchProviderAcceptableContracts(this.providerUrl, this.assetId).subscribe({
+          next: result => this.providerAcceptableForAsset = result,
+          error: (e) => console.error(e),
+          complete: () => { console.info('complete'); this.searching = false; }
+        })
     }
   }
 
