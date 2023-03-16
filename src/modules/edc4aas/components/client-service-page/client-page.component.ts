@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ClientService } from "../../services/client.service";
 
@@ -24,7 +24,7 @@ export class ClientPageComponent implements OnInit {
   providerAcceptableForAsset?: JSON;
   newAccepted?: string;
 
-  constructor(private clientService: ClientService, private route: ActivatedRoute, private ref: ApplicationRef) {
+  constructor(private clientService: ClientService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
