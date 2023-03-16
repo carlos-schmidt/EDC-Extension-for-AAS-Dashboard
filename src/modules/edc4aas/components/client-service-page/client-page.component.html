@@ -26,7 +26,9 @@
     <button style="margin-left: 12em;" (click)="customInput=!customInput" mat-icon-button>
       Add accepted contracts [JSON Array]
     </button>
-    <button style="margin-left: 16em;" (click)="fetchProviderAcceptableContracts();showAcceptableProviderContracts=!showAcceptableProviderContracts" mat-icon-button>
+    <button style="margin-left: 16em;"
+      (click)="fetchProviderAcceptableContracts();showAcceptableProviderContracts=!showAcceptableProviderContracts"
+      mat-icon-button>
       Show acceptable contracts for provider's asset
     </button>
     <br>
@@ -35,25 +37,37 @@
   <section *ngIf="searching">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </section>
+
   <section *ngIf="customInput">
     <mat-form-field>
-      <textarea style="height: 35em; width: 50em;" [(ngModel)]="newAccepted"></textarea>
+      <textarea class="add-accepted-contract-offer-text-area" [(ngModel)]="newAccepted"></textarea>
       <button (click)="addAcceptedContract()" mat-icon-button><mat-icon>add</mat-icon></button>
     </mat-form-field>
   </section>
 
   <ng-container *ngIf="showAccepted">
-    <pre>{{accepted | json}}</pre>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        This EDC's accepted contract offers
+      </mat-expansion-panel-header>
+      <pre>{{accepted | json}}</pre>
+    </mat-expansion-panel>
+
   </ng-container>
 
   <ng-container *ngIf="showAcceptableProviderContracts">
-    <pre>{{providerAcceptableForAsset | json}}</pre>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Provider's accepted contract offers for asset {{assetId}}
+      </mat-expansion-panel-header>
+      <pre>{{providerAcceptableForAsset | json}}</pre>
+    </mat-expansion-panel>
   </ng-container>
 
   <ng-container *ngIf="data">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        Received data (click)<br>
+        Received data<br>
       </mat-expansion-panel-header>
       <pre>{{data | json}}</pre>
     </mat-expansion-panel>
