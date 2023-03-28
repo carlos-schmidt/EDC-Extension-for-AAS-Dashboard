@@ -12,6 +12,7 @@ import {
   TransferHistoryViewerComponent
 } from '../edc-demo/components/transfer-history/transfer-history-viewer.component';
 import { ClientPageComponent } from '../edc4aas/components/client-service-page/client-page.component';
+import { ConfigPageComponent } from '../edc4aas/components/config-page/config-page.component';
 import { OwnSelfDescriptionBrowserComponent } from '../edc4aas/components/own-self-description-browser/own-self-description-browser.component';
 import { SelfDescriptionBrowserComponent } from '../edc4aas/components/self-description-browser/self-description-browser.component';
 
@@ -64,6 +65,11 @@ export const routes: Routes = [
   { path: 'client/:1/:2',
   component: ClientPageComponent,
    data: { title: 'Automated Negotiation', icon: 'android' }
+  },
+  {
+    path: 'config',
+    component: ConfigPageComponent,
+    data: { title: 'Configuration', icon: 'assignment' }
   },
   {
     path: '', redirectTo: 'introduction', pathMatch: 'full'

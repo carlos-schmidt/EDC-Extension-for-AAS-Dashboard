@@ -25,6 +25,8 @@ import { OwnElementCollectionTemplate } from './components/own-self-description-
 import { SelfDescriptionBrowserComponent } from './components/self-description-browser/self-description-browser.component';
 import { ElementCollectionTemplate } from './components/self-description-browser/template/element-collection-template/element-collection-template.component';
 import { InfoViewTemplate } from './components/template/info-view-template/info-view-template.component';
+import { SelfDescriptionBrowserComponent } from './components/self-description-browser/self-description-browser.component';
+import { ConfigPageComponent } from './components/config-page/config-page.component';
 
 @NgModule({
   imports: [
@@ -51,6 +53,7 @@ import { InfoViewTemplate } from './components/template/info-view-template/info-
     MatListModule,
   ],
   declarations: [
+    ConfigPageComponent,
     SelfDescriptionBrowserComponent,
     ElementCollectionTemplate,
     OwnSelfDescriptionBrowserComponent,
@@ -59,6 +62,7 @@ import { InfoViewTemplate } from './components/template/info-view-template/info-
     InfoViewTemplate
   ],
   exports: [
+    ConfigPageComponent,
     SelfDescriptionBrowserComponent,
     ElementCollectionTemplate,
     OwnSelfDescriptionBrowserComponent,

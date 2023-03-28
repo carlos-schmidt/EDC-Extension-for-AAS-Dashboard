@@ -1,0 +1,17 @@
+<div id="wrapper">
+  <b>Note: Some configuration values have no effect when changed at runtime.</b><br>
+    <button class="updateButton" (click)="updateConfig()" mat-raised-button matSuffix>
+      <mat-icon>check</mat-icon>
+      Apply Changes
+    </button>
+    <br>
+    <br>
+    <ng-container *ngFor="let item of config | keyvalue; trackBy: trackByFn">
+      <div class="horizontal">
+        <mat-card class="key-label">{{item.key}}</mat-card>
+        <mat-form-field color="accent">
+          <input ngModel="{{item.value}}" (ngModelChange)="updateConfigValue(item.key, $event)" matInput>
+        </mat-form-field>
+      </div>
+    </ng-container>
+</div>
