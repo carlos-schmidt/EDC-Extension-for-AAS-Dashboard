@@ -40,9 +40,17 @@ export class ClientPageComponent implements OnInit {
     if (this.providerUrl && await this.checkLink(this.providerUrl.toString()) && this.assetId) {
       this.searching = true;
       this.clientService
-        .negotiateContractAndGetData(this.providerUrl, this.assetId).subscribe({
+        .negotiateContractAndGetData(this.providerUrl, this.assetId, this.destinationUrl).subscribe({
           next: result => { this.data = result; this.searching = false; },
-          error: (e) => { console.error(e); alert("Something went wrong. Check console for error message"); this.searching = false; },
+          error: (e) => {
+            if (this.destinationUrl) {
+              this.data = e.error.text; // rxjs tries to parse response as JSON, hence the error message.
+            }
+            else {
+              console.error(e); alert("Something went wrong. Check console for error message");
+            }
+            this.searching = false;
+          },
           complete: () => console.info('complete')
         });
     }
