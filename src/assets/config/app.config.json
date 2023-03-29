@@ -1,4 +1,5 @@
 {
+  "defaultApiUrl": "http://localhost:8181/api",
   "selfDescriptionUrl": "http://localhost:8181/api/selfDescription",
   "apiKey": "password",
   "dataManagementApiUrl": "http://localhost:8182/api/v1/data",

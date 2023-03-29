@@ -5,7 +5,7 @@ import { IdsAssetElement } from '../../models/ids-asset-element';
 import { SelfDescriptionContainer } from '../../models/self-description-container';
 import { SelfDescriptionBrowserService } from '../../services/self-description-browser.service';
 import { SelfDescriptionRegistrationService } from '../../services/self-description-registration.service';
-import { CONNECTOR_SELF_DESCRIPTION_API } from '../../variables';
+import { CONNECTOR_DEFAULT_API } from '../../variables';
 
 
 @Component({
@@ -23,10 +23,10 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
 
   constructor(private selfDescriptionRegistrationService: SelfDescriptionRegistrationService,
     httpClient: HttpClient,
-    @Inject(CONNECTOR_SELF_DESCRIPTION_API) provider: URL,
+    @Inject(CONNECTOR_DEFAULT_API) provider: URL,
     private router: Router) {
-    this.provider = provider;
-    this.providerNoPath = new URL(this.provider.toString().substring(0, new URL(this.provider).pathname.length + 1));
+    this.provider = new URL(provider.toString().concat("/selfDescription"));
+    this.providerNoPath = provider;
     this.selfDescriptionService = new SelfDescriptionBrowserService(httpClient);
   }
 

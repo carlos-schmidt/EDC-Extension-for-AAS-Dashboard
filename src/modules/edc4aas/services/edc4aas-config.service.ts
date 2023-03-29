@@ -14,12 +14,12 @@ export class EDC4AASConfigService {
   }
 
   public getConfig(edcUrl: URL): Observable<Object> {
-    var configUrl = edcUrl + "api/config";
+    var configUrl = edcUrl + "/config";
     return this.httpClient.get(configUrl);
   }
 
   public updateConfig(edcUrl: URL, newConfig: Map<string, string>) {
-    var configUrl = edcUrl + "api/config";
+    var configUrl = edcUrl + "/config";
     var json = JSON.stringify(Object.fromEntries(newConfig));
     console.log(json);
     this.httpClient.put(configUrl, json).subscribe(() => console.log("PUT request to " + configUrl + "..."));

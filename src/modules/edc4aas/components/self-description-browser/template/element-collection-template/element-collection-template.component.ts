@@ -14,8 +14,10 @@ export class ElementCollectionTemplate implements OnInit {
     this.router = router;
   }
 
-  negotiateContract(idsAssetId?: string, provider?: URL) {
-    alert("Switching to negotiation page for element " + idsAssetId + " from provider" + provider?.toString() + "...");
-    this.router.navigateByUrl("/contracts");
+  async negotiateContract(element?: string, provider?: URL) {
+    // TODO see asset-negotiator-dialog
+    console.log(element, provider);
+    //alert("negotiate asset " + element.idsAssetId + " from " + provider.toString());
+    this.router.navigate(["/client", element, provider?.toString()]);
   }
 }

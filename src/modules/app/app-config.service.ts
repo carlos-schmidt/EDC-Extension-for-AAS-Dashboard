@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 export interface AppConfig {
+  defaultApiUrl: string,
   selfDescriptionUrl: string;
   dataManagementApiUrl: string;
   catalogUrl: string;
