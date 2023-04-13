@@ -19,8 +19,8 @@
     <mat-label>AAS Service Port</mat-label><input [(ngModel)]="aasPort" type="number" min="0" max="65535" matInput>
   </mat-form-field>
 
-  <button (click)="registerAASByFile()" *ngIf="aasPort && aasPath || aasConfig && aasPath" mat-icon-button matSuffix>
-    <mat-icon>add</mat-icon>
+  <button (click)="registerAASByFile()" *ngIf="aasPort && aasPath || aasConfig && aasPath" mat-raised-button matSuffix>
+    Publish<mat-icon>add</mat-icon>
   </button>
   <!-- <file-upload></file-upload> -->
 </div>

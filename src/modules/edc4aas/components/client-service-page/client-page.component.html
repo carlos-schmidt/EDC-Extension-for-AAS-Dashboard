@@ -15,20 +15,20 @@
       <input [(ngModel)]="destinationUrl" matInput>
     </mat-form-field>
     <div></div>
-    <button (click)="negotiateContractAndGetData()" mat-icon-button>
+    <button (click)="negotiateContractAndGetData()" mat-raised-button>
       Negotiate
       <mat-icon>cached</mat-icon>
     </button>
-    <button style="margin-left: 5em;" (click)="fetchAcceptedContracts();showAccepted=!showAccepted" mat-icon-button>
+    <button style="margin-left: 5em;" (click)="fetchAcceptedContracts();showAccepted=!showAccepted" mat-raised-button>
       Show accepted contracts
       <mat-icon>search</mat-icon>
     </button>
-    <button style="margin-left: 12em;" (click)="customInput=!customInput" mat-icon-button>
+    <button style="margin-left: 12em;" (click)="customInput=!customInput" mat-raised-button>
       Add accepted contracts [JSON Array]
     </button>
     <button style="margin-left: 16em;"
       (click)="fetchProviderAcceptableContracts();showAcceptableProviderContracts=!showAcceptableProviderContracts"
-      mat-icon-button>
+      mat-raised-button>
       Show acceptable contracts for provider's asset
     </button>
     <br>
@@ -41,7 +41,7 @@
   <section *ngIf="customInput">
     <mat-form-field>
       <textarea class="add-accepted-contract-offer-text-area" [(ngModel)]="newAccepted"></textarea>
-      <button (click)="addAcceptedContract()" mat-icon-button><mat-icon>add</mat-icon></button>
+      <button (click)="addAcceptedContract()" mat-raised-button><mat-icon>add</mat-icon></button>
     </mat-form-field>
   </section>
 

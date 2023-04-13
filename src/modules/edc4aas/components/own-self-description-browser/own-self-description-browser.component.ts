@@ -6,6 +6,8 @@ import { SelfDescriptionContainer } from '../../models/self-description-containe
 import { SelfDescriptionBrowserService } from '../../services/self-description-browser.service';
 import { SelfDescriptionRegistrationService } from '../../services/self-description-registration.service';
 import { CONNECTOR_DEFAULT_API } from '../../variables';
+import { AssetAdministrationShell } from '../../models/shell';
+import { SelfDescription } from '../../models/self-description';
 
 
 @Component({
@@ -21,9 +23,7 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
   private providerNoPath: URL;
   private selfDescriptionService: SelfDescriptionBrowserService;
 
-  constructor(private selfDescriptionRegistrationService: SelfDescriptionRegistrationService,
-    httpClient: HttpClient,
-    @Inject(CONNECTOR_DEFAULT_API) provider: URL,
+  constructor(httpClient: HttpClient, @Inject(CONNECTOR_DEFAULT_API) provider: URL,
     private router: Router) {
     this.provider = new URL(provider.toString().concat("/selfDescription"));
     this.providerNoPath = provider;
@@ -39,7 +39,6 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
     alert("Navigating to contract page for asset " + element.idsContractId + "... ");
     this.reroute("/contract-definitions");
   }
-
 
   async updateSelfDescriptionContainer() {
     this.selfDescriptionService.readSelfDescriptions(this.provider);
