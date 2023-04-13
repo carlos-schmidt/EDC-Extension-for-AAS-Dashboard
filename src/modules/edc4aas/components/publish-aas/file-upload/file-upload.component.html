@@ -1,0 +1,17 @@
+<div ngClass="{{dragAreaClass}}">
+  <div class="col-md-12 text-center">
+    Configuration File Path:
+    <a href="javascript:void(0)" (click)="file.click()">
+      <ng-container *ngIf="aasPath">
+        {{aasPath}}
+      </ng-container>
+      <ng-container *ngIf="!aasPath">
+        Choose file {{aasPath}}
+      </ng-container>
+    </a>
+    <input type="file" #file [multiple]="false" (change)="onFileChange($event)" style="display:none" />
+  </div>
+</div>
+<div class="error" *ngIf="error">
+  Only one file at time allowed
+</div>

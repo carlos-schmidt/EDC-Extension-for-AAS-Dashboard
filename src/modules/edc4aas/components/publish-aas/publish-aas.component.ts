@@ -18,12 +18,17 @@ export class PublishAASComponent implements OnInit {
   aasPath: string = "";
   aasConfig: string = "";
 
+  error?: string;
+  dragAreaClass?: string;
+
   constructor(private selfDescriptionRegistrationService: SelfDescriptionRegistrationService,
     @Inject(CONNECTOR_DEFAULT_API) provider: URL) {
     this.provider = new URL(provider.toString().concat("/selfDescription"));
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.dragAreaClass = "dragarea";
+  }
 
   async registerAASByUrl() {
     var sanitized = this.aasUrl.toLowerCase().replace(" ", "%20");

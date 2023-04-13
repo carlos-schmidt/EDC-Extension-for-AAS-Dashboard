@@ -23,6 +23,7 @@ import { ClientPageComponent } from './components/client-service-page/client-pag
 import { ConfigPageComponent } from './components/config-page/config-page.component';
 import { OwnSelfDescriptionBrowserComponent } from './components/own-self-description-browser/own-self-description-browser.component';
 import { OwnElementCollectionTemplate } from './components/own-self-description-browser/template/own-element-collection-template/own-element-collection-template.component';
+import { FileUpload } from './components/publish-aas/file-upload/file-upload.component';
 import { PublishAASComponent } from './components/publish-aas/publish-aas.component';
 import { SelfDescriptionBrowserComponent } from './components/self-description-browser/self-description-browser.component';
 import { ElementCollectionTemplate } from './components/self-description-browser/template/element-collection-template/element-collection-template.component';
@@ -60,7 +61,8 @@ import { InfoViewTemplate } from './components/template/info-view-template/info-
     OwnElementCollectionTemplate,
     ClientPageComponent,
     InfoViewTemplate,
-    PublishAASComponent
+    PublishAASComponent,
+    FileUpload
   ],
   exports: [
     ConfigPageComponent,
@@ -70,7 +72,8 @@ import { InfoViewTemplate } from './components/template/info-view-template/info-
     OwnElementCollectionTemplate,
     ClientPageComponent,
     InfoViewTemplate,
-    PublishAASComponent
+    PublishAASComponent,
+    FileUpload
   ]
 })
 export class Edc4AasModule {
