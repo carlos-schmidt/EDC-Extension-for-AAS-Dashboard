@@ -1,0 +1,27 @@
+<div id="wrapper">
+  Register an AAS service by URL or by file
+
+  <mat-form-field class="search-form-field" color="accent">
+    <mat-label>URL</mat-label>
+    <input [(ngModel)]="aasUrl" type="url" matInput>
+    <button (click)="registerAASByUrl()" *ngIf="aasUrl" mat-icon-button matSuffix>
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="search-form-field" color="accent">
+    <mat-label>Environment Path</mat-label><input [(ngModel)]="aasPath" matInput>
+  </mat-form-field>
+  <mat-form-field class="search-form-field" color="accent">
+    <mat-label>Configuration File Path</mat-label><input [(ngModel)]="aasConfig" matInput>
+  </mat-form-field>
+  <mat-form-field class="number-form-field" color="accent">
+    <mat-label>AAS Service Port</mat-label><input [(ngModel)]="aasPort" type="number" min="0" max="65535" matInput>
+  </mat-form-field>
+
+  <button
+    (click)="registerAASByFile()"
+    *ngIf="aasPort && aasPath || aasConfig && aasPath" mat-icon-button matSuffix>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

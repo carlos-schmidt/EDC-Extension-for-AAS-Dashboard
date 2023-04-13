@@ -20,12 +20,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ClientPageComponent } from './components/client-service-page/client-page.component';
+import { ConfigPageComponent } from './components/config-page/config-page.component';
 import { OwnSelfDescriptionBrowserComponent } from './components/own-self-description-browser/own-self-description-browser.component';
 import { OwnElementCollectionTemplate } from './components/own-self-description-browser/template/own-element-collection-template/own-element-collection-template.component';
+import { PublishAASComponent } from './components/publish-aas/publish-aas.component';
 import { SelfDescriptionBrowserComponent } from './components/self-description-browser/self-description-browser.component';
 import { ElementCollectionTemplate } from './components/self-description-browser/template/element-collection-template/element-collection-template.component';
 import { InfoViewTemplate } from './components/template/info-view-template/info-view-template.component';
-import { ConfigPageComponent } from './components/config-page/config-page.component';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { ConfigPageComponent } from './components/config-page/config-page.compon
     OwnSelfDescriptionBrowserComponent,
     OwnElementCollectionTemplate,
     ClientPageComponent,
-    InfoViewTemplate
+    InfoViewTemplate,
+    PublishAASComponent
   ],
   exports: [
     ConfigPageComponent,
@@ -67,7 +69,8 @@ import { ConfigPageComponent } from './components/config-page/config-page.compon
     OwnSelfDescriptionBrowserComponent,
     OwnElementCollectionTemplate,
     ClientPageComponent,
-    InfoViewTemplate
+    InfoViewTemplate,
+    PublishAASComponent
   ]
 })
 export class Edc4AasModule {

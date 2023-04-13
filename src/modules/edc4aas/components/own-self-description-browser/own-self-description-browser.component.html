@@ -1,44 +1,5 @@
 <div id="wrapper">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>Register an AAS service by URL or by file</mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <mat-form-field class="search-form-field" color="accent">
-        <mat-label>URL</mat-label>
-        <input #aasUrl type="url" matInput>
-        <button (click)="aasUrl.value=''" *ngIf="aasUrl.value" mat-icon-button matSuffix>
-          <mat-icon>close</mat-icon>
-        </button>
-        <button (click)="registerAASByUrl(aasUrl.value)" *ngIf="aasUrl.value" mat-icon-button matSuffix>
-          <mat-icon>add</mat-icon>
-        </button>
-      </mat-form-field>
-      <br>
-      <mat-form-field class="search-form-field" color="accent">
-        <mat-label>Environment Path</mat-label><input #aasFilePath matInput>
-      </mat-form-field>
-      <mat-form-field class="search-form-field" color="accent">
-        <mat-label>Configuration File Path</mat-label><input #aasConfig matInput>
-      </mat-form-field>
-      <mat-form-field class="number-form-field" color="accent">
-        <mat-label>AAS Service Port</mat-label><input #aasPort type="number" min="0" max="65535" matInput>
-      </mat-form-field>
-
-      <button (click)="aasFilePath.value = ''; aasPort.value = ''; aasConfig.value"
-        *ngIf="aasFilePath.value || aasPort.value || aasConfig.value" mat-icon-button matSuffix>
-        <mat-icon>close</mat-icon>
-      </button>
-
-      <button
-        (click)="registerAASByFile(aasFilePath.value, aasPort.value, aasConfig.value); aasFilePath.value = ''; aasPort.value = ''"
-        *ngIf="aasPort.value && aasFilePath.value || aasConfig.value && aasFilePath.value" mat-icon-button matSuffix>
-        <mat-icon>add</mat-icon>
-      </button>
-
-  </mat-expansion-panel>
-
-  <mat-card *ngIf="selfDescriptionContainer?.selfDescriptions | async as selfDescriptions; else no_self_description">
+    <mat-card *ngIf="selfDescriptionContainer?.selfDescriptions | async as selfDescriptions; else no_self_description">
     <mat-card-content *ngFor="let selfDescription of selfDescriptions" class="self-description-card">
       <div class="aas-element-div" mat-line>AAS</div>
       <mat-expansion-panel>
