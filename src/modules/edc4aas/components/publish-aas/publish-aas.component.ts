@@ -8,26 +8,19 @@ import { CONNECTOR_DEFAULT_API } from '../../variables';
   templateUrl: './publish-aas.component.html',
   styleUrls: ['./publish-aas.component.scss']
 })
-export class PublishAASComponent implements OnInit {
+export class PublishAASComponent {
 
   notFound: boolean = false;
   private provider: URL;
 
   aasUrl: string = "http://";
-  aasPort: number = 12345;
-  aasPath: string = "";
+  aasPort: number = 8080;
+  aasPath: string = "C:/festoDemoAAS.json";
   aasConfig: string = "";
-
-  error?: string;
-  dragAreaClass?: string;
 
   constructor(private selfDescriptionRegistrationService: SelfDescriptionRegistrationService,
     @Inject(CONNECTOR_DEFAULT_API) provider: URL) {
-    this.provider = new URL(provider.toString().concat("/selfDescription"));
-  }
-
-  ngOnInit() {
-    this.dragAreaClass = "dragarea";
+    this.provider = provider;
   }
 
   async registerAASByUrl() {

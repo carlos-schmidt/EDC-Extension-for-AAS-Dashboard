@@ -1,26 +1,32 @@
 <div id="wrapper">
   Register an AAS service by URL or by file
-
-  <mat-form-field class="search-form-field" color="accent">
+  <br><br>
+  <hr class="solid">
+  <br><br>
+  <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
     <mat-label>URL</mat-label>
     <input [(ngModel)]="aasUrl" type="url" matInput>
-    <button (click)="registerAASByUrl()" *ngIf="aasUrl" mat-icon-button matSuffix>
-      <mat-icon>add</mat-icon>
-    </button>
   </mat-form-field>
+  <button (click)="registerAASByUrl()" *ngIf="aasUrl" style="min-width: 110px" mat-raised-button matSuffix>
+    Register Service
+  </button>
   <br>
-  <mat-form-field class="search-form-field" color="accent">
+  <hr class="solid">
+  <br>
+  <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
     <mat-label>Environment Path</mat-label><input [(ngModel)]="aasPath" matInput>
   </mat-form-field>
-  <mat-form-field class="search-form-field" color="accent">
+  <br>
+  <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
     <mat-label>Configuration File Path</mat-label><input [(ngModel)]="aasConfig" matInput>
   </mat-form-field>
-  <mat-form-field class="number-form-field" color="accent">
+  <br>
+  <mat-form-field class="number-form-field" color="accent" style="margin-right: 10px;width: 500px">
     <mat-label>AAS Service Port</mat-label><input [(ngModel)]="aasPort" type="number" min="0" max="65535" matInput>
   </mat-form-field>
-
-  <button (click)="registerAASByFile()" *ngIf="aasPort && aasPath || aasConfig && aasPath" mat-raised-button matSuffix>
-    Publish<mat-icon>add</mat-icon>
+  <button (click)="registerAASByFile()" *ngIf="aasPort && aasPath || aasConfig && aasPath"
+    style="min-width: 110px;align-items: center;" mat-raised-button matSuffix>
+    Create Service
   </button>
   <!-- <file-upload></file-upload> -->
 </div>
