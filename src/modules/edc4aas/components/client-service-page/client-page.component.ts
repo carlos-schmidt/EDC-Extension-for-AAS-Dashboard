@@ -19,10 +19,12 @@ export class ClientPageComponent implements OnInit {
   customInput: boolean = false;
   showAccepted: boolean = false;
   showAcceptableProviderContracts: boolean = false;
+  showData: boolean = false;
 
   accepted?: JSON;
   providerAcceptableForAsset?: JSON;
   newAccepted?: string;
+  errorMessage?: string;
 
   constructor(private clientService: ClientService, private route: ActivatedRoute) {
   }
@@ -41,17 +43,22 @@ export class ClientPageComponent implements OnInit {
       this.searching = true;
       this.clientService
         .negotiateContractAndGetData(this.providerUrl, this.assetId, this.destinationUrl).subscribe({
-          next: result => { this.data = result; this.searching = false; },
+          next: result => this.data = result,
           error: (e) => {
             if (this.destinationUrl) {
+              this.errorMessage = "There was an error. Please check your EDC's output for details.";
               this.data = e.error.text; // rxjs tries to parse response as JSON, hence the error message.
             }
             else {
-              console.error(e); alert("Something went wrong. Check console for error message");
+              console.error(e); this.errorMessage = "There was an error. Please check your EDC's output for details.";
             }
             this.searching = false;
           },
-          complete: () => console.info('complete')
+          complete: () => {
+            console.info('complete');
+            this.showData = true;
+            this.searching = false;
+          }
         });
     }
   }
@@ -62,8 +69,17 @@ export class ClientPageComponent implements OnInit {
     this.clientService
       .fetchAcceptedContracts().subscribe({
         next: result => this.accepted = result,
-        error: (e) => console.error(e),
-        complete: () => { console.info('complete'); this.searching = false; }
+        error: (e) => {
+          console.error(e);
+          this.errorMessage = "There was an error. Please check your EDC's output for details.";
+          this.searching = false;
+        },
+        complete: () => {
+          console.info('complete');
+          this.showAccepted = true;
+          this.searching = false;
+          this.errorMessage = "";
+        }
       });
   }
 
@@ -72,8 +88,15 @@ export class ClientPageComponent implements OnInit {
     if (this.newAccepted) {
       this.clientService.addAcceptedContract(this.newAccepted).subscribe({
         next: _ => _,
-        error: (e) => console.error(e),
-        complete: () => console.info('complete')
+        error: (e) => {
+          console.error(e);
+          this.errorMessage = "There was an error. Please check your EDC's output for details."
+          this.searching = false;
+        },
+        complete: () => {
+          console.info('complete');
+          this.errorMessage = "";
+        }
       });
     }
   }
@@ -84,8 +107,17 @@ export class ClientPageComponent implements OnInit {
       this.clientService
         .fetchProviderAcceptableContracts(this.providerUrl, this.assetId).subscribe({
           next: result => this.providerAcceptableForAsset = result,
-          error: (e) => console.error(e),
-          complete: () => { console.info('complete'); this.searching = false; }
+          error: (e) => {
+            console.error(e);
+            this.errorMessage = "There was an error. Please check your EDC's output for details.";
+            this.searching = false;
+          },
+          complete: () => {
+            console.info('complete');
+            this.searching = false;
+            this.showAcceptableProviderContracts = true;
+            this.errorMessage = "";
+          }
         })
     }
   }
