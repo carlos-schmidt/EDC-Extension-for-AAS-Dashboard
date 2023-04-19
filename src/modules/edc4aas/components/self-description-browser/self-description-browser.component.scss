@@ -27,11 +27,6 @@
   margin-right: 15px;
   margin-bottom: 15px;
   background-color: #363636;
-  border: 2px solid rgb(0, 0, 0);
-}
-
-.mat-list-base.inline-list {
-    display: flex;
 }
 
 .aas-element-name {
@@ -45,10 +40,6 @@
   font-weight: bold !important;
 }
 
-.main-property-icon {
-  font-size: 12px;
-}
-
 :host ::ng-deep div.mat-expansion-panel-body {
   padding-left: 0 !important;
 }
@@ -56,12 +47,6 @@
 .search-form-field {
   min-width: 200px;
   width: 30%;
-}
-
-.card-actions {
-  margin-left: 0;
-  display: flex;
-  justify-content: center;
 }
 
 .self-description-title {

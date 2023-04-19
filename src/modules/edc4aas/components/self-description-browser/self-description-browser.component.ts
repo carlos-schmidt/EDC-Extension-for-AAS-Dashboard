@@ -15,7 +15,7 @@ export class SelfDescriptionBrowserComponent implements OnInit {
 
   selfDescriptionContainers$: Set<SelfDescriptionContainer>;
   fetch$ = new BehaviorSubject(null);
-  searchText = 'https://localhost:8181/api/selfDescription';
+  searchText = 'http://localhost:8181/api/selfDescription';
 
   constructor(private selfDescriptionService: SelfDescriptionBrowserService,
     protected httpClient: HttpClient,
