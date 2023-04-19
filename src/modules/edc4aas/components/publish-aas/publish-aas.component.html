@@ -1,8 +1,6 @@
 <div id="wrapper">
-  Register an AAS service by URL or by file
   <br><br>
-  <hr class="solid">
-  <br><br>
+  <b>Register a remote Asset Administration Shell service by its URL:</b><br><br>
   <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
     <mat-label>URL</mat-label>
     <input [(ngModel)]="aasUrl" type="url" matInput>
@@ -11,14 +9,15 @@
     Register Service
   </button>
   <br>
-  <hr class="solid">
-  <br>
+  <hr class="solid"><br>
+  <b>Create an Asset Administration Shell service from within the EDC4AAS-Extension:</b><br><br>
+
   <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
     <mat-label>Environment Path</mat-label><input [(ngModel)]="aasPath" matInput>
   </mat-form-field>
   <br>
   <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
-    <mat-label>Configuration File Path</mat-label><input [(ngModel)]="aasConfig" matInput>
+    <mat-label>FA³ST Configuration File Path</mat-label><input [(ngModel)]="aasConfig" matInput>
   </mat-form-field>
   <br>
   <mat-form-field class="number-form-field" color="accent" style="margin-right: 10px;width: 500px">
@@ -28,5 +27,9 @@
     style="min-width: 110px;align-items: center;" mat-raised-button matSuffix>
     Create Service
   </button>
-  <!-- <file-upload></file-upload> -->
+  <br><br>
+  Note: To create an AAS service, either a path to a FA³ST configuration file or an HTTP port must be provided.
+  <!-- If filling out a complete path by selecting a file in the browser can be done, file upload can be used:
+     <file-upload></file-upload>
+  -->
 </div>
