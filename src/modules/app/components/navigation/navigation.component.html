@@ -5,12 +5,16 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>EDC Demo</mat-toolbar>
     <mat-nav-list>
-      <a [routerLink]="[route.path]" *ngFor="let route of routes">
-      <mat-list-item *ngIf="route.component">
-        <mat-icon mat-list-icon>{{route.data?.icon}}</mat-icon>
-        <span matLine>{{route.data?.title ?? route.path}}</span>
-      </mat-list-item>
-    </a>
+      <ng-container *ngFor="let route of routes">
+        <mat-toolbar *ngIf="route.data?.title === 'Publish AAS'">Provider</mat-toolbar>
+        <mat-toolbar *ngIf="route.data?.title === 'Access Remote AAS'">Client</mat-toolbar>
+        <a [routerLink]="[route.path]">
+          <mat-list-item *ngIf="route.component">
+            <mat-icon mat-list-icon>{{route.data?.icon}}</mat-icon>
+            <span matLine>{{route.data?.title ?? route.path}}</span>
+          </mat-list-item>
+        </a>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -4,7 +4,7 @@ import { CONNECTOR_DEFAULT_API } from '../../variables';
 
 
 @Component({
-  selector: 'Publish AAS',
+  selector: 'publish-aas',
   templateUrl: './publish-aas.component.html',
   styleUrls: ['./publish-aas.component.scss']
 })
