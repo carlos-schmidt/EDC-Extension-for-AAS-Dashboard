@@ -1,9 +1,5 @@
 <div id="wrapper">
   <b>Note: Some configuration values have no effect when changed at runtime.</b><br>
-    <button class="updateButton" (click)="updateConfig()" mat-raised-button matSuffix>
-      <mat-icon>check</mat-icon>
-      Apply Changes
-    </button>
     <br>
     <br>
     <ng-container *ngFor="let item of config | keyvalue; trackBy: trackByFn">
@@ -14,4 +10,22 @@
         </mat-form-field>
       </div>
     </ng-container>
+    <br>
+    <button class="updateButton" (click)="updateConfig()" mat-raised-button matSuffix>
+      <mat-icon>check</mat-icon>
+      Apply Changes
+    </button>
+    <br>
+    <br>
+    <br>
+
+    <td *ngIf="newestLog">
+      Message Log (new to old)
+      <button (click)="log='';newestLog=''" mat-raised-button>Clear</button><br>
+      <div style="white-space: pre-wrap;overflow-y:auto;">
+        <mark style="background-color: black;color: white;">{{newestLog}}</mark>
+        <br>
+        {{log}}
+      </div>
+    </td>
 </div>

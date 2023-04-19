@@ -1,15 +1,32 @@
+#wrapper {
+  margin: 20px;
+}
+
 .horizontal {
   display: inline-flex;
-  margin-left: 5%;
   height: min-content;
 }
 
 .key-label {
+  margin-top: .25em;
   width: 20em;
   height: min-content;
+
+}
+
+.mat-card {
+  margin-right:0.6em;
+  height:1.6em;
+
 }
 
 .mat-form-field {
+  display: block;
   width: 20em;
   height: min-content;
+  margin-right: 3.1em;
+}
+
+.updateButton {
+  margin-left: 77.7em;
 }
