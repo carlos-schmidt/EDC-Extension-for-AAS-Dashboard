@@ -2,32 +2,35 @@
   <ng-container style="display: flex; flex-direction: row;justify-content: center; align-items: center;">
     <td>
       <label>Warning: Provider URL might be wrong since the IDS port<br>
-         is usually different from the self description port...</label>
+        is usually different from the self description port...</label>
       <br><br>
-      <mat-form-field style="padding-top: 10px;">
-        <mat-label>Provider URL</mat-label>
-        <input [(ngModel)]="providerUrl" matInput>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Asset ID</mat-label>
-        <input [(ngModel)]="assetId" matInput>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Destination URL</mat-label>
-        <input [(ngModel)]="destinationUrl" matInput>
-      </mat-form-field>
-      <div></div>
+      <ng-container>
+        <mat-form-field>
+          <mat-label>Provider URL</mat-label>
+          <input [(ngModel)]="providerUrl" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Asset ID</mat-label>
+          <input [(ngModel)]="assetId" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Destination URL</mat-label>
+          <input [(ngModel)]="destinationUrl" matInput>
+        </mat-form-field>
+      </ng-container>
     </td>
-    <td style="padding-top: 10px; padding-right:10px; padding-left:10px">
-      <br><br><br><br>
+    <td style="padding-left: 2em;">
+      <br><br><br><br><br><br><br><br><br><br><br><br>
       <button (click)="negotiateContractAndGetData()" mat-raised-button>
         Negotiate
         <mat-icon>cached</mat-icon>
       </button>
-      <br><br>
-      <button (click)="fetchAcceptedContracts()" mat-raised-button>
+    </td>
+    <td style="padding-left: 2em;">
+      <br><br><br><br><br><br>
+      <button style="margin-top: .6em;" (click)="fetchAcceptedContracts()" mat-raised-button>
         Show accepted contracts
         <mat-icon>search</mat-icon>
       </button>
@@ -40,8 +43,18 @@
         Show acceptable contracts for provider's asset
       </button>
     </td>
+    <td *ngIf="newestLog">
+      Message Log (new to old)
+      <button (click)="log='';newestLog=''" mat-raised-button>Clear</button><br>
+      <div style="white-space: pre-wrap;overflow-y:auto; max-width:630px; max-height:250px">
+        <mark style="background-color: black;color: white;">{{newestLog}}</mark>
+        <br>
+        {{log}}
+        <br>
+      </div>
+    </td>
   </ng-container>
-  <section>{{errorMessage}}</section>
+  <section></section>
   <section *ngIf="searching">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </section>
@@ -62,7 +75,6 @@
       </mat-expansion-panel-header>
       <pre>{{accepted | json}}</pre>
     </mat-expansion-panel>
-
   </ng-container>
 
   <ng-container *ngIf="showAcceptableProviderContracts">

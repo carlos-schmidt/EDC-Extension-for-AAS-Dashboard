@@ -24,7 +24,8 @@ export class ClientPageComponent implements OnInit {
   accepted?: JSON;
   providerAcceptableForAsset?: JSON;
   newAccepted?: string;
-  errorMessage?: string;
+  log: string = "";
+  newestLog: string = "";
 
   constructor(private clientService: ClientService, private route: ActivatedRoute) {
   }
@@ -46,11 +47,11 @@ export class ClientPageComponent implements OnInit {
           next: result => this.data = result,
           error: (e) => {
             if (this.destinationUrl) {
-              this.errorMessage = "There was an error. Please check your EDC's output for details.";
+              this.addLogMessage("Negotiate: There was an error. Please check your EDC's output for details.");
               this.data = e.error.text; // rxjs tries to parse response as JSON, hence the error message.
             }
             else {
-              console.error(e); this.errorMessage = "There was an error. Please check your EDC's output for details.";
+              console.error(e); this.addLogMessage("Negotiate: There was an error. Please check your EDC's output for details.");
             }
             this.searching = false;
           },
@@ -58,6 +59,7 @@ export class ClientPageComponent implements OnInit {
             console.info('complete');
             this.showData = true;
             this.searching = false;
+            this.addLogMessage("Negotiation complete.");
           }
         });
     }
@@ -71,14 +73,15 @@ export class ClientPageComponent implements OnInit {
         next: result => this.accepted = result,
         error: (e) => {
           console.error(e);
-          this.errorMessage = "There was an error. Please check your EDC's output for details.";
+          this.addLogMessage("Show own accepted contracts: There was an error. Please check your EDC's output for details.");
           this.searching = false;
         },
         complete: () => {
           console.info('complete');
           this.showAccepted = true;
           this.searching = false;
-          this.errorMessage = "";
+          this.addLogMessage("This EDC's accepted contracts fetched.");
+
         }
       });
   }
@@ -90,12 +93,13 @@ export class ClientPageComponent implements OnInit {
         next: _ => _,
         error: (e) => {
           console.error(e);
-          this.errorMessage = "There was an error. Please check your EDC's output for details."
+          this.addLogMessage("Add accepted contracts: There was an error. Please check your EDC's output for details.");
           this.searching = false;
         },
         complete: () => {
           console.info('complete');
-          this.errorMessage = "";
+          this.addLogMessage("Accepted contract added to EDC.");
+          this.customInput = false;
         }
       });
     }
@@ -109,17 +113,24 @@ export class ClientPageComponent implements OnInit {
           next: result => this.providerAcceptableForAsset = result,
           error: (e) => {
             console.error(e);
-            this.errorMessage = "There was an error. Please check your EDC's output for details.";
+            this.addLogMessage("Show provider's contracts: There was an error. Please check your EDC's output for details.");
             this.searching = false;
           },
           complete: () => {
             console.info('complete');
             this.searching = false;
             this.showAcceptableProviderContracts = true;
-            this.errorMessage = "";
+
+            this.addLogMessage("Fetched provider's accepted contracts.");
           }
         })
     }
+  }
+
+  async addLogMessage(message: String) {
+    var newLog = this.newestLog + "\n" + this.log;
+    this.log = newLog;
+    this.newestLog = new Date().toLocaleString() + ": " + message;
   }
 
   checkLink = async (url: string) => (await fetch(url));

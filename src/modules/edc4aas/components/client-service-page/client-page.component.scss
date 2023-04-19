@@ -1,5 +1,9 @@
+#wrapper {
+  margin: 20px;
+}
+
 :host ::ng-deep .mat-form-field {
-  width: 30em;
+  width: 35em;
 }
 
 .add-accepted-contract-offer-text-area {
