@@ -80,7 +80,7 @@ export class ClientPageComponent implements OnInit {
           console.info('complete');
           this.showAccepted = true;
           this.searching = false;
-          this.addLogMessage("This EDC's accepted contracts fetched.");
+          this.addLogMessage("Fetched this EDC's accepted contracts.");
 
         }
       });
@@ -98,7 +98,7 @@ export class ClientPageComponent implements OnInit {
         },
         complete: () => {
           console.info('complete');
-          this.addLogMessage("Accepted contract added to EDC.");
+          this.addLogMessage("Added accepted contract to EDC.");
           this.customInput = false;
         }
       });
