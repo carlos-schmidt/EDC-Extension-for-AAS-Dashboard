@@ -7,13 +7,19 @@
 }
 
 .search-form-field {
-  padding-left: 5px;
-  min-width: 150px;
-  width: 30%;
+  width: 50em;
 }
 
 .number-form-field {
-  padding-left: 5px;
-  min-width: 20px;
-  width: 10%;
+  width: 9em;
+  margin-bottom: 0;
+  margin-top: auto;
+}
+
+.create-service-button {
+  width: fit-content;
+  margin-left: 3em;
+  height: fit-content;
+  margin-bottom: 2.4em;
+  margin-top: auto;
 }
