@@ -8,10 +8,13 @@
         </mat-expansion-panel-header>
         <mat-card *ngFor="let assetAdministrationShell of selfDescription.assetAdministrationShells"
           class="aas-element-card">
-          <info-view [name]="'AssetAdministrationShell'" [element]="assetAdministrationShell"
-            [id]="assetAdministrationShell.identification"></info-view>
-          <mat-icon (click)="editContract(assetAdministrationShell)"
-            title="Edit contract associated with this element">edit</mat-icon>
+          <div style="display:flex">
+            <info-view [name]="'AssetAdministrationShell'" [element]="assetAdministrationShell"
+              [id]="assetAdministrationShell.identification"></info-view>
+            <button class="right-aligned-button" (click)="editContract(assetAdministrationShell)"
+              title="Edit contract associated with this element" mat-icon-button disabled
+              matSuffix><mat-icon>edit</mat-icon></button>
+          </div>
         </mat-card>
       </mat-expansion-panel>
 
@@ -20,10 +23,12 @@
           <mat-panel-title>Submodels</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-card *ngFor="let submodel of selfDescription.submodels" class="aas-element-card">
-
-          <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></info-view>
-          <mat-icon (click)="editContract(submodel)" title="Edit contract associated with this element">edit</mat-icon>
-
+          <div style="display:flex">
+            <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></info-view>
+            <button class="right-aligned-button" (click)="editContract(submodel)"
+              tooltip="Edit contract associated with this element" mat-icon-button disabled
+              matSuffix><mat-icon>edit</mat-icon></button>
+          </div>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>Submodel Elements ({{submodel.submodelElements?.length}})</mat-panel-title>
@@ -38,10 +43,13 @@
           <mat-panel-title>Concept Descriptions</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-card *ngFor="let conceptDescription of selfDescription.conceptDescriptions" class="aas-element-card">
-          <info-view [name]="'ConceptDescription'" [element]="conceptDescription"
-            [id]="conceptDescription.identification"></info-view>
-          <mat-icon (click)="editContract(conceptDescription)"
-            title="Edit contract associated with this element">edit</mat-icon>
+          <div style="display:flex">
+            <info-view [name]="'ConceptDescription'" [element]="conceptDescription"
+              [id]="conceptDescription.identification"></info-view>
+            <button class="right-aligned-button" (click)="editContract(conceptDescription)"
+              title="Edit contract associated with this element" mat-icon-button disabled
+              matSuffix><mat-icon>edit</mat-icon></button>
+          </div>
         </mat-card>
       </mat-expansion-panel> -->
 
