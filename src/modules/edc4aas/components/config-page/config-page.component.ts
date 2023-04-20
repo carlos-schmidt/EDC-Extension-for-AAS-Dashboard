@@ -83,4 +83,9 @@ export class ConfigPageComponent implements OnInit {
     this.newestLog = new Date().toLocaleString() + ": " + message;
   }
 
+  async clearLog() {
+    this.newestLog = "";
+    this.log = "";
+  }
+
 }

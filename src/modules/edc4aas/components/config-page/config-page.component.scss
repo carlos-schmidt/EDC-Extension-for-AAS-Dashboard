@@ -4,29 +4,29 @@
 
 .horizontal {
   display: inline-flex;
-  height: min-content;
-}
-
-.key-label {
-  margin-top: .25em;
-  width: 20em;
-  height: min-content;
-
+  height: max-content;
 }
 
 .mat-card {
-  margin-right:0.6em;
-  height:1.6em;
-
+  margin-right: 0.6em;
+  height: 1.6em;
 }
 
 .mat-form-field {
   display: block;
-  width: 20em;
   height: min-content;
-  margin-right: 3.1em;
+  margin-right: 1em;
+  width: 21em;
 }
 
 .updateButton {
-  margin-left: 77.7em;
+  height: fit-content;
+  min-width: fit-content;
+  margin-right: 3em;
+}
+
+.messageLog {
+  white-space: pre-wrap;
+  min-width: 40em;
+  overflow-y: auto;
 }
