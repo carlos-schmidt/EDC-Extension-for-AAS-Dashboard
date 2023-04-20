@@ -1,18 +1,28 @@
 <div id="wrapper">
-  <div>
+  <div class="search-div">
     <mat-form-field class="search-form-field" color="accent">
       <mat-label>Search by provider URL</mat-label>
-      <input [(ngModel)]="searchText" matInput>
-      <button (click)="searchText=''" *ngIf="searchText" mat-raised-button matSuffix>
+      <input style="min-width: min-content;" [(ngModel)]="searchText" (keyup.enter)="onSearch()" matInput>
+      <button (click)="searchText=''" *ngIf="searchText" mat-icon-button matSuffix>
         <mat-icon>close</mat-icon>
       </button>
-      <button (click)="onSearch()" *ngIf="searchText" mat-raised-button matSuffix>
-        <mat-icon>search</mat-icon>
-      </button>
     </mat-form-field>
-    <mat-paginator [length]="selfDescriptionContainers$.size" hidePageSize="true"
-      pageSize="selfDescriptionContainers$.size">
-    </mat-paginator>
+    <button style="height:fit-content;margin:auto;margin-left: 2em;" (click)="onSearch()" mat-raised-button matSuffix>
+      Search <mat-icon>search</mat-icon>
+    </button>
+    <div *ngIf="newestLog">
+      <div style="display:flex;">
+        <label style="margin-left:0; margin-top: auto; margin-bottom:auto;">Message Log (new to old)</label>
+        <button style="margin-left: auto;margin-right: 0;" (click)="log='';newestLog=''" mat-raised-button
+          matSuffix>Clear</button>
+      </div>
+      <br>
+      <div style="white-space: pre-wrap;overflow-y:auto; max-width:630px; max-height:250px">
+        <mark style="background-color: black;color: white;">{{newestLog}}</mark>
+        <br>
+        <label>{{log}}</label>
+      </div>
+    </div>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="start start">
     <ng-container *ngFor="let selfDescriptionContainer of selfDescriptionContainers$" class="self-description-card">
@@ -28,6 +38,7 @@
 
         <mat-card-content *ngFor="let selfDescription of selfDescriptions" class="self-description-card">
           <div class="aas-element-div" mat-line>AAS</div>
+
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>Shells</mat-panel-title>
@@ -46,11 +57,14 @@
               <mat-panel-title>Submodels</mat-panel-title>
             </mat-expansion-panel-header>
             <mat-card *ngFor="let submodel of selfDescription.submodels" class="aas-element-card">
-
-              <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></info-view>
-              <mat-icon (click)="negotiateContract(submodel, selfDescriptionContainer.provider)"
-                title="Negotiate contract for this asset">attachment</mat-icon>
-
+              <div style="display: flex;">
+                <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></info-view>
+                <button class="right-aligned-button"
+                  (click)="negotiateContract(submodel, selfDescriptionContainer.provider)"
+                  title="Negotiate contract for this asset" mat-icon-button matSuffix>
+                  <mat-icon>attachment</mat-icon>
+                </button>
+              </div>
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>Submodel Elements ({{submodel.submodelElements?.length}})</mat-panel-title>
@@ -66,10 +80,15 @@
               <mat-panel-title>Concept Descriptions</mat-panel-title>
             </mat-expansion-panel-header>
             <mat-card *ngFor="let conceptDescription of selfDescription.conceptDescriptions" class="aas-element-card">
-              <info-view [name]="'ConceptDescription'" [element]="conceptDescription"
-                [id]="conceptDescription.identification"></info-view>
-              <mat-icon (click)="negotiateContract(conceptDescription, selfDescriptionContainer.provider)"
-                title="Negotiate contract for this asset">attachment</mat-icon>
+              <div style="display: flex;">
+                <info-view [name]="'ConceptDescription'" [element]="conceptDescription"
+                  [id]="conceptDescription.identification"></info-view>
+                <button class="right-aligned-button"
+                  (click)="negotiateContract(conceptDescription, selfDescriptionContainer.provider)"
+                  title="Negotiate contract for this asset" mat-icon-button matSuffix>
+                  <mat-icon>attachment</mat-icon>
+                </button>
+              </div>
             </mat-card>
           </mat-expansion-panel>
         </mat-card-content>

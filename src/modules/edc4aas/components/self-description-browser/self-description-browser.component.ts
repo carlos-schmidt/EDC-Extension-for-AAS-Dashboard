@@ -17,6 +17,9 @@ export class SelfDescriptionBrowserComponent implements OnInit {
   fetch$ = new BehaviorSubject(null);
   searchText = 'http://localhost:8181/api/selfDescription';
 
+  log: string = "";
+  newestLog: string = "";
+
   constructor(private selfDescriptionService: SelfDescriptionBrowserService,
     protected httpClient: HttpClient,
     private router: Router) {
@@ -47,6 +50,17 @@ export class SelfDescriptionBrowserComponent implements OnInit {
   reroute(site: string) {
     this.router.navigateByUrl(site);
     // TODO how do i pass element info to other sites?
+  }
+
+  async addLogMessage(message: String) {
+    var newLog = this.newestLog + "\n" + this.log;
+    this.log = newLog;
+    this.newestLog = new Date().toLocaleString() + ": " + message;
+  }
+
+  async clearLog() {
+    this.newestLog = "";
+    this.log = "";
   }
 
   checkLink = async (url: string) => (await fetch(url)).ok;
