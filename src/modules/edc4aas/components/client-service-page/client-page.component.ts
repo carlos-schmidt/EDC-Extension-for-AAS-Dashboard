@@ -36,6 +36,7 @@ export class ClientPageComponent implements OnInit {
       this.providerUrl = new URL(params['2']);
       this.providerUrl = new URL(this.providerUrl?.origin + "/api/v1/ids/data");
       this.assetId = params['1'];
+      this.addLogMessage("Initialized with URL " + this.providerUrl + ", asset " + this.assetId);
     });
   }
 
@@ -63,6 +64,8 @@ export class ClientPageComponent implements OnInit {
             this.addLogMessage("Negotiation complete.");
           }
         });
+    } else {
+      this.addLogMessage("Negotiate: Provider URL and/or asset id missing")
     }
   }
 
@@ -121,10 +124,11 @@ export class ClientPageComponent implements OnInit {
             console.info('complete');
             this.searching = false;
             this.showAcceptableProviderContracts = true;
-
             this.addLogMessage("Fetched provider's accepted contracts.");
           }
-        })
+        });
+    } else {
+      this.addLogMessage("Show provider's contracts: Provider URL and/or asset id missing")
     }
   }
 
