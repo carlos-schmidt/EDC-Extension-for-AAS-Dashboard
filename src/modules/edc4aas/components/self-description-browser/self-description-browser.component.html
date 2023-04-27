@@ -11,19 +11,6 @@
       <button style="height:fit-content;margin:auto;margin-left: 2em;" (click)="onSearch()" mat-raised-button matSuffix>
         Search <mat-icon>search</mat-icon>
       </button>
-      <div *ngIf="newestLog">
-        <div style="display:flex;">
-          <label style="margin-left:0; margin-top: auto; margin-bottom:auto;">Message Log (new to old)</label>
-          <button style="margin-left: auto;margin-right: 0;" (click)="log='';newestLog=''" mat-raised-button
-            matSuffix>Clear</button>
-        </div>
-        <br>
-        <div style="white-space: pre-wrap;overflow-y:auto; max-width:630px; max-height:250px">
-          <mark style="background-color: black;color: white;">{{newestLog}}</mark>
-          <br>
-          <label>{{log}}</label>
-        </div>
-      </div>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start start">
       <ng-container *ngFor="let selfDescriptionContainer of selfDescriptionContainers$" class="self-description-card">
