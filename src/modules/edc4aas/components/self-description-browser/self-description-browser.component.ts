@@ -30,10 +30,9 @@ export class SelfDescriptionBrowserComponent implements OnInit {
 
   async onSearch() {
     var sanitized = this.searchText.replace(" ", "%20");
-
     if (await this.checkLink(`${sanitized}`)) {
       this.selfDescriptionService.readSelfDescriptions(new URL(sanitized));
-    } else alert("URL not responding");
+    } else this.addLogMessage("URL not responding: " + sanitized);
   }
 
   async onDelete(selfDescriptionContainer: SelfDescriptionContainer) {

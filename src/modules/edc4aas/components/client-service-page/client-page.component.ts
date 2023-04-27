@@ -24,6 +24,7 @@ export class ClientPageComponent implements OnInit {
   accepted?: JSON;
   providerAcceptableForAsset?: JSON;
   newAccepted?: string;
+
   log: string = "";
   newestLog: string = "";
 
@@ -131,6 +132,11 @@ export class ClientPageComponent implements OnInit {
     var newLog = this.newestLog + "\n" + this.log;
     this.log = newLog;
     this.newestLog = new Date().toLocaleString() + ": " + message;
+  }
+
+  async clearLog() {
+    this.newestLog = "";
+    this.log = "";
   }
 
   checkLink = async (url: string) => (await fetch(url));

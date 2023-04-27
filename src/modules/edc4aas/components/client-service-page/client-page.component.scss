@@ -1,5 +1,6 @@
 #wrapper {
   margin: 20px;
+  display: flex;
 }
 
 :host ::ng-deep .mat-form-field {
@@ -10,5 +11,43 @@
   height: 35em;
   width: 50em;
   background-color: rgb(46, 46, 46);
+  color: white;
+}
+
+.message-log {
+  margin-left: auto;
+  margin-right: 0%;
+  resize: vertical;
+  overflow: hidden;
+  /* Hide scrollbars */
+  max-width: 20em;
+  min-width: 20em;
+  border-left: 2px solid black;
+  padding-left: 2px;
+  height: 30em;
+}
+
+.use-case-separator {
+  border: 2px solid black;
+  padding: 0px 10px;
+  margin: 10px 10px;
+  width: fit-content;
+}
+
+.clear-messages-button {
+  margin-right: 0%;
+  margin-left: auto;
+  height: fit-content;
+}
+
+.log {
+  white-space: pre-wrap;
+  overflow-y: auto;
+  font-size: smaller;
+}
+
+.newest-message {
+  width: fit-content;
+  background-color: black;
   color: white;
 }

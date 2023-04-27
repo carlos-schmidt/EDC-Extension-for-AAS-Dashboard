@@ -1,5 +1,6 @@
 #wrapper {
   margin: 20px;
+  display: flex;
 }
 
 .main-property-icon {
@@ -22,4 +23,42 @@
   height: fit-content;
   margin-bottom: 2.4em;
   margin-top: auto;
+}
+
+.use-case-separator {
+  border: 2px solid black;
+  padding: 10px 10px;
+  margin: 10px 10px;
+  width: fit-content;
+}
+
+.message-log {
+  margin-left: auto;
+  margin-right: 0%;
+  resize: vertical;
+  overflow: hidden;
+  /* Hide scrollbars */
+  max-width: 20em;
+  min-width: 20em;
+  border-left: 2px solid black;
+  padding-left: 2px;
+  height: 30em;
+}
+
+.clear-messages-button {
+  margin-right: 0%;
+  margin-left: auto;
+  height: fit-content;
+}
+
+.log {
+  white-space: pre-wrap;
+  overflow-y: auto;
+  font-size: smaller;
+}
+
+.newest-message {
+  width: fit-content;
+  background-color: black;
+  color: white;
 }

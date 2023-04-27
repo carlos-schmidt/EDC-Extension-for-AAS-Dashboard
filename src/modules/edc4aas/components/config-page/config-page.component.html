@@ -1,29 +1,32 @@
-<div id="wrapper">
-  <b>Note: Some configuration values have no effect when changed at runtime.</b><br>
-  <br>
-  <ng-container *ngFor="let item of config | keyvalue; trackBy: trackByFn">
-    <div class="horizontal">
-      <mat-form-field color="accent">
-        <mat-label>{{item.key}}</mat-label>
-        <input ngModel="{{item.value}}" (ngModelChange)="updateConfigValue(item.key, $event)" matInput>
-      </mat-form-field>
-    </div>
-  </ng-container>
-  <br>
-  <div style="display:flex;">
-    <button class="updateButton" (click)="updateConfig()" mat-raised-button>
-      <mat-icon>check</mat-icon>
-      Apply Changes
-    </button>
-    <td *ngIf="newestLog">
-      Message Log (new to old)
-      <button style="height:fit-content;margin-left:1em;" (click)="clearLog()" mat-raised-button>Clear</button>
-      <br><br>
-      <div class="messageLog">
-        <mark style="width:fit-content;background-color: black;color: white;">{{newestLog}}</mark>
-        <br>
-        {{log}}
+<div id="wrapper" style="display: flex">
+  <div>
+    <b>Note: Some configuration values have no effect when changed at runtime.</b><br>
+    <br>
+    <ng-container *ngFor="let item of config | keyvalue; trackBy: trackByFn">
+      <div class="horizontal">
+        <mat-form-field color="accent">
+          <mat-label>{{item.key}}</mat-label>
+          <input ngModel="{{item.value}}" (ngModelChange)="updateConfigValue(item.key, $event)" matInput>
+        </mat-form-field>
       </div>
-    </td>
+    </ng-container>
+    <br>
+    <div style="display:flex;">
+      <button class="updateButton" (click)="updateConfig()" mat-raised-button>
+        <mat-icon>check</mat-icon>
+        Apply Changes
+      </button>
+    </div>
   </div>
+  <div class="message-log">
+    Message Log (new to old)
+    <button class="clear-messages-button" (click)="clearLog()" mat-raised-button>Clear</button>
+    <br><br>
+    <div class="log">
+      <mark class="newest-message">{{newestLog}}</mark>
+      <br>
+      <div>{{log}}</div>
+    </div>
+  </div>
+
 </div>

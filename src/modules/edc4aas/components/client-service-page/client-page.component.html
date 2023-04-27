@@ -1,98 +1,100 @@
 <div id="wrapper">
-  <label>Warning: Provider URL might be wrong since the IDS port<br>
-    is usually different from the self description port...</label>
-  <div style="display: flex;">
-    <td style="max-width: min-content;">
-      <ng-container>
-        <mat-form-field>
-          <mat-label>Provider URL</mat-label>
-          <input [(ngModel)]="providerUrl" matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Asset ID</mat-label>
-          <input [(ngModel)]="assetId" matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Destination URL</mat-label>
-          <input [(ngModel)]="destinationUrl" matInput>
-        </mat-form-field>
-      </ng-container>
-    </td>
-    <td>
-      <button style="margin: 50% 2em;" (click)="negotiateContractAndGetData()" mat-raised-button>
-        Negotiate <mat-icon>cached</mat-icon>
-      </button>
-    </td>
-    <td>
-      <div style="margin: 10% auto;">
-        <button (click)="fetchAcceptedContracts()" mat-raised-button>
-          Show accepted contracts
-          <mat-icon>search</mat-icon>
-        </button>
-        <br><br>
-        <button (click)="customInput=!customInput" mat-raised-button>
-          Add accepted contracts
-        </button>
-        <br><br>
-        <button (click)="fetchProviderAcceptableContracts()" mat-raised-button>
-          Show acceptable contracts for provider's asset
-        </button>
+  <div>
+    <label>Warning: Provider URL might be wrong since the IDS port is usually different from the self description
+      port...</label><br><br>
+    <div>
+      <div style="display: flex;">
+        <div class="use-case-separator" style="display: flex;margin:0%">
+          <div style="max-width: min-content;margin-top: 1em;">
+            <mat-form-field>
+              <mat-label>Provider URL</mat-label>
+              <input [(ngModel)]="providerUrl" matInput>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Asset ID</mat-label>
+              <input [(ngModel)]="assetId" matInput>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Destination URL</mat-label>
+              <input [(ngModel)]="destinationUrl" matInput>
+            </mat-form-field>
+          </div>
+          <div style="margin-top:auto; margin-bottom: 1.5em; margin-left: 1em;">
+            <button style="margin-bottom: 1.5em;" (click)="negotiateContractAndGetData()" mat-raised-button>
+              Negotiate <mat-icon>cached</mat-icon>
+            </button>
+            <br>
+            <button (click)="fetchProviderAcceptableContracts()" mat-raised-button>
+              Show acceptable contracts for provider's asset
+            </button>
+          </div>
+        </div>
+
+        <div class="use-case-separator" style="display: flex;margin:0%;">
+
+          <div style="margin-top:auto; margin-bottom: 1.7em; margin-left: 1em;">
+            <button style="margin-bottom: 1.5em;" (click)="fetchAcceptedContracts()" mat-raised-button>
+              Show client accepted contracts
+            </button>
+            <br>
+            <button (click)="customInput=!customInput" mat-raised-button>
+              Add accepted contracts
+            </button>
+          </div>
+        </div>
       </div>
-    </td>
-    <td *ngIf="newestLog">
-      <div style="display:flex;">
-        <label style="margin-left:0; margin-top: auto; margin-bottom:auto;">Message Log (new to old)</label>
-        <button style="margin-left: auto;margin-right: 0;" (click)="log='';newestLog=''" mat-raised-button
-          matSuffix>Clear</button>
-      </div>
-      <br>
-      <div style="white-space: pre-wrap;overflow-y:auto; max-width:630px; max-height:250px">
-        <mark style="background-color: black;color: white;">{{newestLog}}</mark>
-        <br>
-        <label>{{log}}</label>
-      </div>
-    </td>
+    </div>
+    <section></section>
+    <section *ngIf="searching">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </section>
+
+    <section *ngIf="customInput">
+      Add automatically accepted contracts in a JSON array<br>
+      <mat-form-field>
+        <textarea class="add-accepted-contract-offer-text-area" [(ngModel)]="newAccepted"></textarea>
+        <button (click)="addAcceptedContract()" mat-raised-button><mat-icon>add</mat-icon></button>
+      </mat-form-field>
+    </section>
+
+    <ng-container *ngIf="showAccepted">
+      <button (click)="showAccepted = false" mat-raised-button>Hide</button><br>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          This EDC's accepted contract offers
+        </mat-expansion-panel-header>
+        <pre style="color:white">{{accepted | json}}</pre>
+      </mat-expansion-panel>
+    </ng-container>
+
+    <ng-container *ngIf="showAcceptableProviderContracts">
+      <button (click)="showAcceptableProviderContracts = false" mat-raised-button>Hide</button><br>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Provider's accepted contract offers for asset {{assetId}}
+        </mat-expansion-panel-header>
+        <pre>{{providerAcceptableForAsset | json}}</pre>
+      </mat-expansion-panel>
+    </ng-container>
+
+    <ng-container *ngIf="showData">
+      <button (click)="showData = false" mat-raised-button>Hide</button><br>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Received data<br>
+        </mat-expansion-panel-header>
+        <pre>{{data | json}}</pre>
+      </mat-expansion-panel>
+    </ng-container>
   </div>
-  <section></section>
-  <section *ngIf="searching">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </section>
-
-  <section *ngIf="customInput">
-    Add automatically accepted contracts in a JSON array<br>
-    <mat-form-field>
-      <textarea class="add-accepted-contract-offer-text-area" [(ngModel)]="newAccepted"></textarea>
-      <button (click)="addAcceptedContract()" mat-raised-button><mat-icon>add</mat-icon></button>
-    </mat-form-field>
-  </section>
-
-  <ng-container *ngIf="showAccepted">
-    <button (click)="showAccepted = false" mat-raised-button>Hide</button><br>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        This EDC's accepted contract offers
-      </mat-expansion-panel-header>
-      <pre style="color:white">{{accepted | json}}</pre>
-    </mat-expansion-panel>
-  </ng-container>
-
-  <ng-container *ngIf="showAcceptableProviderContracts">
-    <button (click)="showAcceptableProviderContracts = false" mat-raised-button>Hide</button><br>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Provider's accepted contract offers for asset {{assetId}}
-      </mat-expansion-panel-header>
-      <pre>{{providerAcceptableForAsset | json}}</pre>
-    </mat-expansion-panel>
-  </ng-container>
-
-  <ng-container *ngIf="showData">
-    <button (click)="showData = false" mat-raised-button>Hide</button><br>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Received data<br>
-      </mat-expansion-panel-header>
-      <pre>{{data | json}}</pre>
-    </mat-expansion-panel>
-  </ng-container>
+  <div class="message-log">
+    Message Log (new to old)
+    <button class="clear-messages-button" (click)="clearLog()" mat-raised-button>Clear</button>
+    <br><br>
+    <div class="log">
+      <mark class="newest-message">{{newestLog}}</mark>
+      <br>
+      <div>{{log}}</div>
+    </div>
+  </div>
 </div>

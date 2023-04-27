@@ -12,11 +12,12 @@ export class ConfigPageComponent implements OnInit {
   config?: Map<string, string>;
   provider: URL;
 
+newestLog: string = new Date().toLocaleString() + ": ...";
   log: string = "";
-  newestLog: string = "";
 
   constructor(private edc4AASConfigService: EDC4AASConfigService,
-    @Inject(CONNECTOR_DEFAULT_API) provider: URL) {
+    @Inject(CONNECTOR_DEFAULT_API) provider: URL,
+  ) {
     this.provider = provider;
   }
 
@@ -63,20 +64,6 @@ export class ConfigPageComponent implements OnInit {
     return index;
   }
 
-  isBool(value: any) {
-    console.log(value === "true" || value === "false")
-    return value === "true" || value === "false";
-  }
-
-  async toggle(key: string) {
-    if (this.config?.get(key) === "true") {
-      this.config.set(key, "false");
-    }
-    else if (this.config?.get(key) === "false") {
-      this.config?.set(key, "true");
-    }
-  }
-
   async addLogMessage(message: String) {
     var newLog = this.newestLog + "\n" + this.log;
     this.log = newLog;
@@ -87,5 +74,4 @@ export class ConfigPageComponent implements OnInit {
     this.newestLog = "";
     this.log = "";
   }
-
 }
