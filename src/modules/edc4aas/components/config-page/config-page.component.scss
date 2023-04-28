@@ -1,15 +1,54 @@
-.horizontal {
-  display: inline-flex;
-  margin-left: 5%;
-  height: min-content;
+#wrapper {
+  margin: 20px;
+  display: flex;
 }
 
-.key-label {
-  width: 20em;
-  height: min-content;
+.horizontal {
+  display: inline-flex;
+  height: max-content;
+}
+
+.mat-card {
+  margin-right: 0.6em;
+  height: 1.6em;
 }
 
 .mat-form-field {
-  width: 20em;
+  display: block;
   height: min-content;
+  margin-right: 1em;
+  width: 21em;
+}
+
+.updateButton {
+  height: fit-content;
+  min-width: fit-content;
+}
+
+.message-log {
+  resize: vertical;
+  overflow: hidden; /* Hide scrollbars */
+  max-width: 20em;
+  min-width: 20em;
+  border-left: 2px solid black;
+  padding-left: 2px;
+  height: 30em;
+}
+
+.clear-messages-button {
+  margin-right: 0%;
+  margin-left: auto;
+  height: fit-content;
+}
+
+.log {
+  white-space: pre-wrap;
+  overflow-y: auto;
+  font-size: smaller;
+}
+
+.newest-message {
+  width: fit-content;
+  background-color: black;
+  color: white;
 }

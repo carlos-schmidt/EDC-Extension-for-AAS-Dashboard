@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { SelfDescription } from '../models/self-description';
 import { SelfDescriptionContainer } from '../models/self-description-container';
 
@@ -24,6 +24,9 @@ export class SelfDescriptionBrowserService {
     return this.selfDescriptionContainers$;
   }
 
+  public updateSelfDescriptions(selfDescriptions: Observable<SelfDescription[]>, url: URL) {
+    this.selfDescriptionContainers$.add(new SelfDescriptionContainer(selfDescriptions, url));
+  }
   public readSelfDescriptions(url: URL) {
     const selfDescriptions = this.fetch$
       .pipe(
@@ -31,7 +34,7 @@ export class SelfDescriptionBrowserService {
           return this.httpClient.get<Array<SelfDescription>>(url.toString());
         }));
 
-    this.selfDescriptionContainers$.add(new SelfDescriptionContainer(selfDescriptions, url));
+    this.updateSelfDescriptions(selfDescriptions, url);
   }
 
   public removeSelfDescriptionContainer(selfDescriptionContainer: SelfDescriptionContainer) {

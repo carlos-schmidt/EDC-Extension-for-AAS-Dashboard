@@ -22,8 +22,7 @@ export class EDC4AASConfigService {
     var configUrl = edcUrl + "/config";
     var json = JSON.stringify(Object.fromEntries(newConfig));
     console.log(json);
-    this.httpClient.put(configUrl, json).subscribe(() => console.log("PUT request to " + configUrl + "..."));
-    return this.getConfig(edcUrl);
+    return this.httpClient.put(configUrl, json);
   }
 
 }

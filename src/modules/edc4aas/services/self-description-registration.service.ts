@@ -20,7 +20,7 @@ export class SelfDescriptionRegistrationService {
   */
   public registerUrl(edcUrl: URL, aasUrl: URL) {
     var requestUrl = edcUrl + "/client?url=" + aasUrl;
-    return this.httpClient.post(requestUrl, null).subscribe((error) => console.log(error));
+    return this.httpClient.post(requestUrl, null);
   }
 
   /**
@@ -33,7 +33,7 @@ export class SelfDescriptionRegistrationService {
    */
   registerFileWithPort(edcUrl: URL, aasPath: string, aasPort: Number) {
     var requestUrl = edcUrl + "/environment?environment=" + aasPath + "&port=" + aasPort;
-    return this.httpClient.post(requestUrl, null).subscribe((error) => console.log(error));;
+    return this.httpClient.post(requestUrl, null);
   }
 
   /**
@@ -47,6 +47,6 @@ export class SelfDescriptionRegistrationService {
    */
   registerFileWithConfig(edcUrl: URL, aasPath: string, aasConfigFile: string) {
     var requestUrl = edcUrl + "/environment?environment=" + aasPath + "&config=" + aasConfigFile;
-    return this.httpClient.post(requestUrl, null).subscribe((error) => console.log(error));;
+    return this.httpClient.post(requestUrl, null);
   }
 }

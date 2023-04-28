@@ -12,18 +12,47 @@ export class ConfigPageComponent implements OnInit {
   config?: Map<string, string>;
   provider: URL;
 
+newestLog: string = new Date().toLocaleString() + ": ...";
+  log: string = "";
+
   constructor(private edc4AASConfigService: EDC4AASConfigService,
-    @Inject(CONNECTOR_DEFAULT_API) provider: URL) {
+    @Inject(CONNECTOR_DEFAULT_API) provider: URL,
+  ) {
     this.provider = provider;
   }
 
   public ngOnInit() {
-    this.edc4AASConfigService.getConfig(this.provider).subscribe((data) => this.config = new Map(Object.entries(data)));;
+    this.fetchConfig();
   }
 
-  public updateConfig() {
+  async fetchConfig() {
+    this.edc4AASConfigService.getConfig(this.provider).subscribe({
+      next: (data) => this.config = new Map(Object.entries(data)),
+      error: (e) => {
+        console.error(e);
+        this.addLogMessage("Fetch config: There was an error. Please check your EDC's output or the dashboard's configuration for details.");
+      },
+      complete: () => {
+        console.info('complete');
+        this.addLogMessage("Fetched config.");
+      }
+    });
+  }
+
+  async updateConfig() {
     if (this.config)
-      this.edc4AASConfigService.updateConfig(this.provider, this.config);
+      this.edc4AASConfigService.updateConfig(this.provider, this.config).subscribe({
+        next: _ => _,
+        error: (e) => {
+          console.error(e);
+          this.addLogMessage("Update config: There was an error. Please check your EDC's output for details.");
+        },
+        complete: () => {
+          console.info('complete');
+          this.addLogMessage("Updated config.");
+        }
+      });
+    this.fetchConfig();
   }
 
   // GUI update function
@@ -35,16 +64,14 @@ export class ConfigPageComponent implements OnInit {
     return index;
   }
 
-  isBool(value: any) {
-    console.log(value === "true" || value === "false")
-    return value === "true" || value === "false";
+  async addLogMessage(message: String) {
+    var newLog = this.newestLog + "\n" + this.log;
+    this.log = newLog;
+    this.newestLog = new Date().toLocaleString() + ": " + message;
   }
-  toggle(key: string) {
-    if (this.config?.get(key) === "true") {
-      this.config.set(key, "false");
-    }
-    else if (this.config?.get(key) === "false") {
-      this.config?.set(key, "true");
-    }
+
+  async clearLog() {
+    this.newestLog = "";
+    this.log = "";
   }
 }

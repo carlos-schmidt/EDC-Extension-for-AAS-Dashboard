@@ -4,7 +4,7 @@ import { CONNECTOR_DEFAULT_API } from '../../variables';
 
 
 @Component({
-  selector: 'Publish AAS',
+  selector: 'publish-aas',
   templateUrl: './publish-aas.component.html',
   styleUrls: ['./publish-aas.component.scss']
 })
@@ -18,6 +18,9 @@ export class PublishAASComponent {
   aasPath: string = "C:/festoDemoAAS.json";
   aasConfig: string = "";
 
+  newestLog: string = new Date().toLocaleString() + ": ...";
+  log: string = "";
+
   constructor(private selfDescriptionRegistrationService: SelfDescriptionRegistrationService,
     @Inject(CONNECTOR_DEFAULT_API) provider: URL) {
     this.provider = provider;
@@ -25,7 +28,18 @@ export class PublishAASComponent {
 
   async registerAASByUrl() {
     var sanitized = this.aasUrl.toLowerCase().replace(" ", "%20");
-    this.selfDescriptionRegistrationService.registerUrl(this.provider, new URL(sanitized));
+    var request = this.selfDescriptionRegistrationService.registerUrl(this.provider, new URL(sanitized));
+    request.subscribe({
+      next: _ => _,
+      error: (e) => {
+        console.error(e);
+        this.addLogMessage("Register via URL: There was an error. Please check your EDC's output or the dashboard's configuration for details.");
+      },
+      complete: () => {
+        console.info('complete');
+        this.addLogMessage("Registered AAS via URL " + this.aasUrl);
+      }
+    });
   }
 
   async registerAASByFile() {
@@ -42,7 +56,18 @@ export class PublishAASComponent {
   }
 
   private _registerAASByFileUsingConfig(aasPath: string, aasConfig: string) {
-    this.selfDescriptionRegistrationService.registerFileWithConfig(this.provider, aasPath, aasConfig);
+    var request = this.selfDescriptionRegistrationService.registerFileWithConfig(this.provider, aasPath, aasConfig);
+    request.subscribe({
+      next: _ => _,
+      error: (e) => {
+        console.error(e);
+        this.addLogMessage("Register using config file: There was an error. Please check your EDC's output or the dashboard's configuration for details.");
+      },
+      complete: () => {
+        console.info('complete');
+        this.addLogMessage("Registered AAS.");
+      }
+    });
   }
 
   private _registerAASByFileUsingPort(aasPath: string, aasPort: number) {
@@ -50,7 +75,28 @@ export class PublishAASComponent {
       alert("Port not in [0,2^16)");
       return;
     }
-    this.selfDescriptionRegistrationService.registerFileWithPort(this.provider, aasPath, aasPort);
+    var request = this.selfDescriptionRegistrationService.registerFileWithPort(this.provider, aasPath, aasPort);
+    request.subscribe({
+      next: _ => _,
+      error: (e) => {
+        console.error(e);
+        this.addLogMessage("Register using port: There was an error. Please check your EDC's output or the dashboard's configuration for details.");
+      },
+      complete: () => {
+        console.info('complete');
+        this.addLogMessage("Registered AAS.");
+      }
+    });
   }
 
+  async addLogMessage(message: String) {
+    var newLog = this.newestLog + "\n" + this.log;
+    this.log = newLog;
+    this.newestLog = new Date().toLocaleString() + ": " + message;
+  }
+
+  async clearLog() {
+    this.newestLog = "";
+    this.log = "";
+  }
 }

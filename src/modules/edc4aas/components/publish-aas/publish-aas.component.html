@@ -1,32 +1,54 @@
 <div id="wrapper">
-  Register an AAS service by URL or by file
-  <br><br>
-  <hr class="solid">
-  <br><br>
-  <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
-    <mat-label>URL</mat-label>
-    <input [(ngModel)]="aasUrl" type="url" matInput>
-  </mat-form-field>
-  <button (click)="registerAASByUrl()" *ngIf="aasUrl" style="min-width: 110px" mat-raised-button matSuffix>
-    Register Service
-  </button>
-  <br>
-  <hr class="solid">
-  <br>
-  <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
-    <mat-label>Environment Path</mat-label><input [(ngModel)]="aasPath" matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="search-form-field" color="accent" style="margin-right: 10px;width: 500px">
-    <mat-label>Configuration File Path</mat-label><input [(ngModel)]="aasConfig" matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="number-form-field" color="accent" style="margin-right: 10px;width: 500px">
-    <mat-label>AAS Service Port</mat-label><input [(ngModel)]="aasPort" type="number" min="0" max="65535" matInput>
-  </mat-form-field>
-  <button (click)="registerAASByFile()" *ngIf="aasPort && aasPath || aasConfig && aasPath"
-    style="min-width: 110px;align-items: center;" mat-raised-button matSuffix>
-    Create Service
-  </button>
-  <!-- <file-upload></file-upload> -->
+  <div>
+    <div class="use-case-separator">
+      <b>Register a remote Asset Administration Shell service by its URL:</b><br><br>
+      <mat-form-field class="search-form-field" color="accent">
+        <mat-label>URL</mat-label>
+        <input [(ngModel)]="aasUrl" type="url" (keyup.enter)="registerAASByUrl()" matInput>
+        <button (click)="registerAASByUrl()" *ngIf="aasUrl" tooltip="Register" mat-icon-button matSuffix>
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="use-case-separator">
+
+      <b>Create an Asset Administration Shell service from within the EDC4AAS-Extension:</b><br><br>
+      <div style="display:flex;">
+        <div>
+          <mat-form-field class="search-form-field" color="accent">
+            <mat-label>Environment Path</mat-label><input [(ngModel)]="aasPath" matInput>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="search-form-field" color="accent">
+            <mat-label>FA³ST Configuration File Path</mat-label><input [(ngModel)]="aasConfig" matInput>
+          </mat-form-field>
+          <br>
+          <div>
+            <mat-form-field class="number-form-field" color="accent">
+              <mat-label>AAS Service Port</mat-label><input [(ngModel)]="aasPort" type="number" min="0" max="65535"
+                matInput>
+            </mat-form-field>
+            <button class="create-service-button" (click)="registerAASByFile()"
+              *ngIf="aasPort && aasPath || aasConfig && aasPath" mat-raised-button>
+              Create Service
+            </button>
+          </div>
+        </div>
+      </div>
+      Note: To create an AAS service, either a path to a FA³ST configuration file or an HTTP port must be provided.
+    </div>
+  </div>
+  <div class="message-log">
+    Message Log (new to old)
+    <button class="clear-messages-button" (click)="clearLog()" mat-raised-button>Clear</button>
+    <br><br>
+    <div class="log">
+      <mark class="newest-message">{{newestLog}}</mark>
+      <br>
+      <div>{{log}}</div>
+    </div>
+  </div>
+  <!-- If filling out a complete path by selecting a file in the browser can be done, file upload can be used:
+     <file-upload></file-upload>
+  -->
 </div>
