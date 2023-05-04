@@ -71,7 +71,7 @@ export class PublishAASComponent {
   }
 
   private _registerAASByFileUsingPort(aasPath: string, aasPort: number) {
-    if (aasPort > 65536 || aasPort < 0) {
+    if (aasPort > 65535 || aasPort < 0) {
       alert("Port not in [0,2^16)");
       return;
     }
