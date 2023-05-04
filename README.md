@@ -1,14 +1,20 @@
 # EDC Data Dashboard
-
+This UI simplifies usage of the EDC Extension for AAS: https://github.com/FraunhoferIOSB/EDC-Extension-for-AAS  
+You can provide or request AAS graphically instead of using the API.
 ## Usage with EDC4AAS Extension
 
-The following fields could be required for the connection of the dashboard with the EDC4AAS Extension:
+The following fields could be required for the connection of the dashboard with the EDC4AAS Extension, add them in the EDC configuration:
 
 ```properties
 edc.web.rest.cors.enabled = true
 edc.web.rest.cors.origins = *
 edc.web.rest.cors.headers = x-api-key, content-type
 edc.web.rest.cors.methods = GET, POST, DELETE, PUT, OPTIONS
+```
+To start the Dashboard with Node.js:
+```
+npm install
+npm run start
 ```
 
 Also, the default x-api-key of the extension should be set as `password`
