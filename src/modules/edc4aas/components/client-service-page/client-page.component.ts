@@ -42,18 +42,22 @@ export class ClientPageComponent implements OnInit {
 
   async negotiateContractAndGetData() {
 
-    if (this.providerUrl && await this.checkLink(this.providerUrl.toString()) && this.assetId) {
+    if (this.providerUrl && this.assetId) {
       this.searching = true;
+      console.log("HELLO WORLD")
       this.clientService
         .negotiateContractAndGetData(this.providerUrl, this.assetId, this.destinationUrl).subscribe({
           next: result => this.data = result,
           error: (e) => {
             if (this.destinationUrl) {
-              this.addLogMessage("Negotiate: There was an error. Please check your EDC's output for details.");
-              this.data = e.error.text; // rxjs tries to parse response as JSON, hence the error message.
+              this.addLogMessage("Negotiate: New output received. Please check the data tab.");
+              console.log(e);
+              this.data = e.error.text;
+              this.showData = true;
             }
             else {
-              console.error(e); this.addLogMessage("Negotiate: There was an error. Please check your EDC's output for details.");
+              console.error(e);
+              this.addLogMessage("Negotiate: There was an error. Please check your EDC's output for details.");
             }
             this.searching = false;
           },
@@ -143,5 +147,4 @@ export class ClientPageComponent implements OnInit {
     this.log = "";
   }
 
-  checkLink = async (url: string) => (await fetch(url));
 }

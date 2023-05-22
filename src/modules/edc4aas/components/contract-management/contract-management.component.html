@@ -1,0 +1,46 @@
+<div id="wrapper">
+  <div style="float:left">
+    <label>Warning: Provider URL might be wrong since the IDS port is usually different from the self description
+      port...</label><br><br>
+    <div>
+      <div style="margin-bottom: 1em;">
+        <button style="margin-right: 1em;" (click)="fetchAcceptedContracts()" mat-raised-button>
+          Show client accepted contracts
+        </button>
+        <button (click)="customInput=!customInput" mat-raised-button>
+          Add accepted contracts
+        </button>
+      </div>
+      <ng-container *ngIf="searching">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </ng-container>
+      <ng-container *ngIf="customInput">
+        Add automatically accepted contracts in a JSON array<br>
+        <mat-form-field>
+          <textarea class="add-accepted-contract-offer-text-area" [(ngModel)]="newAccepted"></textarea>
+          <button (click)="addAcceptedContract()" mat-raised-button><mat-icon>add</mat-icon></button>
+          <button (click)="customInput = false" mat-raised-button>Hide</button>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="showAccepted">
+        <button (click)="showAccepted = false" mat-raised-button>Hide</button><br>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            This EDC's accepted contract offers
+          </mat-expansion-panel-header>
+          <pre style="color:white">{{accepted | json}}</pre>
+        </mat-expansion-panel>
+      </ng-container>
+    </div>
+  </div>
+  <div class="message-log">
+    Message Log (new to old)
+    <button class="clear-messages-button" (click)="clearLog()" mat-raised-button>Clear</button>
+    <br><br>
+    <div class="log">
+      <mark class="newest-message">{{newestLog}}</mark>
+      <br>
+      <div>{{log}}</div>
+    </div>
+  </div>
+</div>

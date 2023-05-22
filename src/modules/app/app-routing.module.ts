@@ -11,6 +11,7 @@ import { ConfigPageComponent } from '../edc4aas/components/config-page/config-pa
 import { OwnSelfDescriptionBrowserComponent } from '../edc4aas/components/own-self-description-browser/own-self-description-browser.component';
 import { PublishAASComponent } from '../edc4aas/components/publish-aas/publish-aas.component';
 import { SelfDescriptionBrowserComponent } from '../edc4aas/components/self-description-browser/self-description-browser.component';
+import { ContractManagementComponent } from '../edc4aas/components/contract-management/contract-management.component';
 
 export const routes: Routes = [
   {
@@ -51,17 +52,17 @@ export const routes: Routes = [
   {
     path: 'publish-aas',
     component: PublishAASComponent,
-    data: { title: 'Publish AAS', icon: 'assignment' }
+    data: { title: 'Publish AAS', icon: 'publish' }
   },
   {
     path: 'my-aas',
     component: OwnSelfDescriptionBrowserComponent,
-    data: { title: 'My Published AAS', icon: 'assignment' }
+    data: { title: 'My Published AAS', icon: 'format_list_bulleted' }
   },
   {
     path: 'aas',
     component: SelfDescriptionBrowserComponent,
-    data: { title: 'Access Remote AAS', icon: 'assignment' }
+    data: { title: 'Access Remote AAS', icon: 'settings_input_antenna' }
   },
   {
     path: 'client/:1/:2',
@@ -69,9 +70,14 @@ export const routes: Routes = [
     data: { title: 'Automated Negotiation', icon: 'android' }
   },
   {
+    path: 'contract-management',
+    component: ContractManagementComponent,
+    data: { title: 'Contract Management', icon: 'assignment' }
+  },
+  {
     path: 'config',
     component: ConfigPageComponent,
-    data: { title: 'Configuration', icon: 'assignment' }
+    data: { title: 'Configuration', icon: 'settings' }
   },
   {
     path: '', redirectTo: 'introduction', pathMatch: 'full'
