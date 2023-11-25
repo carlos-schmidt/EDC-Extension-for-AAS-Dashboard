@@ -2,8 +2,8 @@
   "defaultApiUrl": "http://localhost:8181/api",
   "selfDescriptionUrl": "http://localhost:8181/api/selfDescription",
   "apiKey": "password",
-  "dataManagementApiUrl": "http://localhost:8182/api/v1/data",
-  "catalogUrl": "http://localhost:8181/api/v1/data/",
+  "managementApiUrl": "http://localhost:8182/management",
+  "catalogUrl": "http://localhost:8181/management",
   "storageAccount": "company2assets",
   "storageExplorerLinkTemplate": "storageexplorer://v=1",
   "theme": "theme-2"
