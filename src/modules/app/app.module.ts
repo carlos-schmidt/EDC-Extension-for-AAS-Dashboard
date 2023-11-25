@@ -5,11 +5,12 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {CONNECTOR_MANAGEMENT_API} from "./variables";
 import {Configuration} from "../mgmt-api-client";
+import {CONNECTOR_CATALOG_API, CONNECTOR_MANAGEMENT_API} from "./variables";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {EdcApiKeyInterceptor} from "./edc.apikey.interceptor";
 import {environment} from "../../environments/environment";
+import { EdcConnectorClient } from "@think-it-labs/edc-connector-client";
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -54,7 +55,7 @@ import { CONNECTOR_DEFAULT_API } from '../edc4aas/variables';
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     {
       provide: CONNECTOR_MANAGEMENT_API,
-      useFactory: (s: AppConfigService) => s.getConfig()?.dataManagementApiUrl,
+      useFactory: (s: AppConfigService) => s.getConfig()?.managementApiUrl,
       deps: [AppConfigService]
     },
     {
@@ -72,23 +73,23 @@ import { CONNECTOR_DEFAULT_API } from '../edc4aas/variables';
       useFactory: () => [{ id: "AzureStorage", name: "AzureStorage" }, { id: "AmazonS3", name: "AmazonS3" }],
     },
     {
-      provide: Configuration,
-      useFactory: (s: AppConfigService) => {
-        return new Configuration({
-          basePath: s.getConfig()?.dataManagementApiUrl
-        });
-      },
-      deps: [AppConfigService]
-    },
-    {
       provide: HTTP_INTERCEPTORS, multi: true, useFactory: () => {
         let i = new EdcApiKeyInterceptor();
         // TODO: read this from app.config.json??
         i.apiKey = environment.apiKey
         return i;
       }, deps: [AppConfigService]
+    },
+    {
+      provide: EdcConnectorClient,
+      useFactory: (s: AppConfigService) => {
+        return new EdcConnectorClient.Builder()
+          .apiToken(environment.apiKey)
+          .managementUrl(s.getConfig()?.managementApiUrl as string)
+          .build();
+      },
+      deps: [AppConfigService]
     }
-
   ],
   bootstrap: [AppComponent]
 })
