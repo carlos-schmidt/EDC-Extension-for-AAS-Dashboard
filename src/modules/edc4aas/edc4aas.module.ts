@@ -28,6 +28,7 @@ import { PublishAASComponent } from './components/publish-aas/publish-aas.compon
 import { SelfDescriptionBrowserComponent } from './components/self-description-browser/self-description-browser.component';
 import { ElementCollectionTemplate } from './components/self-description-browser/template/element-collection-template/element-collection-template.component';
 import { InfoViewTemplate } from './components/template/info-view-template/info-view-template.component';
+import { ContractManagementComponent } from './components/contract-management/contract-management.component';
 
 @NgModule({
   imports: [
@@ -62,7 +63,8 @@ import { InfoViewTemplate } from './components/template/info-view-template/info-
     ClientPageComponent,
     InfoViewTemplate,
     PublishAASComponent,
-    FileUpload
+    FileUpload,
+    ContractManagementComponent
   ],
   exports: [
     ConfigPageComponent,
@@ -73,7 +75,8 @@ import { InfoViewTemplate } from './components/template/info-view-template/info-
     ClientPageComponent,
     InfoViewTemplate,
     PublishAASComponent,
-    FileUpload
+    FileUpload,
+    ContractManagementComponent
   ]
 })
 export class Edc4AasModule {

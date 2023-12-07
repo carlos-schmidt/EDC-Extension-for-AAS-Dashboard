@@ -20,30 +20,19 @@ npm run start
 Also, the default x-api-key of the extension should be set as `password`
 **Please note: This repository does not contain production-grade code and is only intended for demonstration purposes.**
 
-EDC Data Dashboard is a dev frontend application for [EDC Data Management API](https://github.com/eclipse-dataspaceconnector/DataSpaceConnector).
+EDC Data Dashboard is a dev frontend application for [EDC Management API](https://github.com/eclipse-edc/Connector).
 
 ## Documentation
 
 Developer documentation can be found under [docs/developer](docs/developer/), where the main concepts and decisions are captured as [decision records](docs/developer/decision-records/).
 
-## Generate client code for EDC REST APIs
-
-1. [optional] copy the current version of EDC's `openapi.yaml` file to `openapi/`. There is one checked in, so this is not required.
-2. in a shell execute
-   ```shell
-   docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/openapi/openapi.yaml -g typescript-angular -o /local/src/modules/edc-dmgmt-client/
-   ```
-   This re-generates the service and model classes. 
-
-> Please note that some of the client classes were edited manually after generation. When regenerating the classes for the API update be careful especially not to overwrite service `constructor` methods using the generator!
-
 ## Running the frontend locally
-Should you want to run the frontend on your development machine, you'll have to configure some backend values. Those are stored in `app.config.json`, and 
+Should you want to run the frontend on your development machine, you'll have to configure some backend values. Those are stored in `app.config.json`, and
 by default contain the following:
 
 ```json
 {
-  "dataManagementApiUrl": "{{dataManagementApiUrl}}",
+  "managementApiUrl": "{{managementApiUrl}}",
   "catalogUrl": "{{catalogUrl}}",
   "storageAccount": "{{account}}",
   "storageExplorerLinkTemplate": "storageexplorer://v=1&accountid=/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.Storage/storageAccounts/{{account}}&subscriptionid={{subscriptionId}}&resourcetype=Azure.BlobContainer&resourcename={{container}}",
@@ -52,14 +41,46 @@ by default contain the following:
 Substitute the values as necessary:
 - `apiKey`: enter here what your EDC instance expects in th `x-api-key` header
 - `catalogUrl`: prepend your connector URL, e.g. `http://localhost`, assuming your catalog endpoint is exposed at port 8181, which is the default
-- `dataManagementApiUrl`:  prepend your connector URL, e.g. `http://localhost`, assuming your IDS endpoint is exposed at port 9191
+- `managementApiUrl`:  prepend your connector URL, e.g. `http://localhost`, assuming your IDS endpoint is exposed at port 9191
 - `storageAccount`: insert the name of an Azure Blob Storage account to which the connector has access, otherwise data transfers won't work.
 
 **Be extra careful NOT to commit those changes, as they might leak potentially sensitive information!!!**
 
 As some extra safety consider running `git udpate-index --assume-unchanged src/assets/config/app.config.json` before changing this file.
 
+## Running a frondend and two connectors locally (for demo purpose)
+To test the correct functionality locally you can spin up a local docker compose
+that will load two `data-dashboard`s service and two `connector`s, one for consumer
+and one for provider.
 
+Just start the docker compose.
+```shell
+docker compose up
+```
+
+Consumer data-dashboard will be available at `http://localhost:18080`
+Provider data-dashboard will be available at `http://localhost:28080`
+
+### Running DataDashboard from the host machine (for debugging purpose)
+To have a quicker development cycle, you can also run the DataDashboard from the
+host machine using `npm start`, sending request against the connector loaded by
+docker compose.
+First you need to change the `app.config.json` this way:
+```json
+{
+  ...
+  "managementApiUrl": "http://localhost:4200/management",
+  "catalogUrl": "http://localhost:4200/management",
+  ...
+}
+```
+
+Then start the local DataDashboard:
+```shell
+npm start
+```
+
+The DataDashboard will be available at `http://localhost:4200`
 
 ## Deploy to Azure
 
@@ -90,7 +111,7 @@ export API_KEY=<API_KEY>
 az container create --image ${ACR_NAME}.azurecr.io/edc-showcase/edc-data-dashboard:latest \
 --resource-group $RESOURCE_GROUP \
 --name edc-data-dashboard \
---secrets "app.config.json"="{\"dataManagementApiUrl\": \"$CONNECTOR_DATA_URL\", \"catalogUrl\": \"$CONNECTOR_CATALOG_URL\", \"storageAccount\": \"$STORAGE_ACCOUNT\", \"apiKey\": \"$API_KEY\"}" \
+--secrets "app.config.json"="{\"managementApiUrl\": \"$CONNECTOR_DATA_URL\", \"catalogUrl\": \"$CONNECTOR_CATALOG_URL\", \"storageAccount\": \"$STORAGE_ACCOUNT\", \"apiKey\": \"$API_KEY\"}" \
 --secrets-mount-path /usr/share/nginx/html/assets/config \
 --dns-name-label edc-data-dashboard
 ```
