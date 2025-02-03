@@ -19,7 +19,7 @@ export class SelfDescriptionRegistrationService {
   * @returns HTTP POST response
   */
   public registerUrl(edcUrl: URL, aasUrl: URL) {
-    var requestUrl = edcUrl + "/client?url=" + aasUrl;
+    var requestUrl = edcUrl + "/service?url=" + aasUrl;
     return this.httpClient.post(requestUrl, null, { responseType: 'text' });
   }
 
