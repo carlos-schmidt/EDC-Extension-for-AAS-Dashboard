@@ -1,7 +1,7 @@
 <div id="wrapper">
   <mat-card *ngIf="selfDescriptionContainer?.selfDescriptions | async as selfDescriptions; else no_self_description">
     <mat-card-content *ngFor="let selfDescription of selfDescriptions" class="self-description-card">
-      <div class="aas-element-div" mat-line>AAS</div>
+      <div class="aas-element-div" mat-line>Repository</div>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Shells</mat-panel-title>
