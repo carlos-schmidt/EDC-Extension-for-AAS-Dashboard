@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 
 export interface AppConfig {
   defaultApiUrl: string,
+  consumerApiUrl: string,
   selfDescriptionUrl: string;
   managementApiUrl: string;
   catalogUrl: string;
