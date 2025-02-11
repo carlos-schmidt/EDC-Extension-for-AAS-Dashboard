@@ -25,7 +25,6 @@ import { AppConfigService } from "./app-config.service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { Edc4AasModule } from '../edc4aas/edc4aas.module';
 import { CONNECTOR_DEFAULT_API } from '../edc4aas/variables';
-import { CONSUMER_DEFAULT_API } from '../edc4aas/variables';
 
 @NgModule({
   imports: [
@@ -62,11 +61,6 @@ import { CONSUMER_DEFAULT_API } from '../edc4aas/variables';
     {
       provide: CONNECTOR_DEFAULT_API,
       useFactory: (s: AppConfigService) => s.getConfig()?.defaultApiUrl,
-      deps: [AppConfigService]
-    },
-    {
-      provide: CONSUMER_DEFAULT_API,
-      useFactory: (s: AppConfigService) => s.getConfig()?.consumerApiUrl,
       deps: [AppConfigService]
     },
     {
