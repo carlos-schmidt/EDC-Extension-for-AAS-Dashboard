@@ -64,6 +64,11 @@ import { CONNECTOR_DEFAULT_API } from '../edc4aas/variables';
       deps: [AppConfigService]
     },
     {
+      provide: CONSUMER_DEFAULT_API,
+      useFactory: (s: AppConfigService) => s.getConfig()?.consumerApiUrl,
+      deps: [AppConfigService]
+    },
+    {
       provide: 'HOME_CONNECTOR_STORAGE_ACCOUNT',
       useFactory: (s: AppConfigService) => s.getConfig()?.storageAccount,
       deps: [AppConfigService]

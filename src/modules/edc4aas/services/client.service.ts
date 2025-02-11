@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { CONNECTOR_DEFAULT_API } from "../variables";
+import { CONSUMER_DEFAULT_API } from "../variables";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class ClientService {
 
   clientUrl: URL;
   constructor(private httpClient: HttpClient,
-    @Inject(CONNECTOR_DEFAULT_API) provider: URL) {
+    @Inject(CONSUMER_DEFAULT_API) provider: URL) {
     this.clientUrl = new URL(provider.toString().concat("/automated"));
   }
 
@@ -18,7 +19,7 @@ export class ClientService {
     requestUrl.searchParams.append("providerUrl", provider.toString());
     requestUrl.searchParams.append("assetId", assetId);
     if (destination)
-      requestUrl.searchParams.append("dataDestinationUrl", destination.toString());
+      requestUrl.searchParams.append("provider", destination.toString());
 
     return this.httpClient.post<JSON>(requestUrl.toString(), null);
   }

@@ -1,5 +1,6 @@
 {
   "defaultApiUrl": "http://localhost:8281/api",
+  "consumerApiUrl": "http://localhost:9291/api",
   "selfDescriptionUrl": "http://localhost:8281/api/selfDescription",
   "apiKey": "password",
   "managementApiUrl": "http://localhost:8182/management",

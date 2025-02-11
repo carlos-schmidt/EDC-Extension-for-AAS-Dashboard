@@ -1,6 +1,6 @@
 <div id="wrapper">
   <div>
-    <label>Warning: Provider URL might be wrong since the IDS port is usually different from the self description
+    <label>Warning: Check Provider URL carefully since IDS port is usually different from the self description
       port...</label><br><br>
     <div>
       <div style="display: flex;">
@@ -15,7 +15,7 @@
               <input [(ngModel)]="assetId" matInput>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>Destination URL</mat-label>
+              <mat-label>Provider name</mat-label>
               <input [(ngModel)]="destinationUrl" matInput>
             </mat-form-field>
           </div>
@@ -37,6 +37,7 @@
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </section>
 
+    <!--
     <ng-container *ngIf="showAcceptableProviderContracts">
       <button (click)="showAcceptableProviderContracts = false" mat-raised-button>Hide</button><br>
       <mat-expansion-panel>
@@ -56,6 +57,7 @@
         <pre>{{data | json}}</pre>
       </mat-expansion-panel>
     </ng-container>
+    -->
   </div>
   <div class="message-log">
     Message Log (new to old)
