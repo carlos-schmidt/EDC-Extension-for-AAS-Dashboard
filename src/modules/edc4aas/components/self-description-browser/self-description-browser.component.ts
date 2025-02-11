@@ -43,7 +43,7 @@ export class SelfDescriptionBrowserComponent implements OnInit {
     // TODO see asset-negotiator-dialog
     console.log(element, provider);
     //alert("negotiate asset " + element.idsAssetId + " from " + provider.toString());
-    this.router.navigate(["/client", element.idsAssetId, provider.toString()]);
+    this.router.navigate(["/client", element.id, provider.toString()]);
   }
 
   reroute(site: string) {

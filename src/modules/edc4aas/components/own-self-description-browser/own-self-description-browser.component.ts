@@ -31,7 +31,7 @@ export class OwnSelfDescriptionBrowserComponent implements OnInit {
 
   async editContract(element: IdsAssetElement) {
     // TODO see asset-editor-dialog
-    alert("Navigating to contract page for asset " + element.idsContractId + "... ");
+    alert("Navigating to contract page for asset " + element.id + "... ");
     this.reroute("/contract-definitions");
   }
 

@@ -6,11 +6,11 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Shells</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-card *ngFor="let assetAdministrationShell of selfDescription.assetAdministrationShells"
+        <mat-card *ngFor="let assetAdministrationShell of selfDescription.shells"
           class="aas-element-card">
           <div style="display:flex">
             <info-view [name]="'AssetAdministrationShell'" [element]="assetAdministrationShell"
-              [id]="assetAdministrationShell.identification"></info-view>
+              [id]="assetAdministrationShell.properties.id"></info-view>
             <button class="right-aligned-button" (click)="editContract(assetAdministrationShell)"
               title="Edit contract associated with this element" mat-icon-button disabled
               matSuffix><mat-icon>edit</mat-icon></button>
@@ -24,17 +24,17 @@
         </mat-expansion-panel-header>
         <mat-card *ngFor="let submodel of selfDescription.submodels" class="aas-element-card">
           <div style="display:flex">
-            <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></info-view>
+            <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.properties.id"></info-view>
             <button class="right-aligned-button" (click)="editContract(submodel)"
               tooltip="Edit contract associated with this element" mat-icon-button disabled
               matSuffix><mat-icon>edit</mat-icon></button>
           </div>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title>Submodel Elements ({{submodel.submodelElements?.length}})</mat-panel-title>
+              <mat-panel-title>Submodel Elements ({{submodel.properties.submodelElements?.length}})</mat-panel-title>
             </mat-expansion-panel-header>
-            <own-element-collection *ngFor="let submodelElement of submodel.submodelElements"
-              [element]="submodelElement" [idsContractId]="submodelElement?.idsContractId"></own-element-collection>
+            <own-element-collection *ngFor="let submodelElement of submodel.properties.submodelElements"
+              [element]="submodelElement" [idsContractId]="submodelElement?.id"></own-element-collection>
           </mat-expansion-panel>
         </mat-card>
       </mat-expansion-panel>

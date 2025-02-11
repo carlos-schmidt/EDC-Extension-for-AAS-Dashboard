@@ -1,6 +1,6 @@
 import { IdsAssetElement } from './ids-asset-element';
+import { Properties } from './properties';
 
 export interface SubmodelElement extends IdsAssetElement {
-  idShort: string;
-  value?: SubmodelElement[];
+  properties: Properties;
 }

@@ -3,7 +3,7 @@ import { AssetAdministrationShell } from "./shell";
 import { Submodel } from "./submodel";
 
 export interface SelfDescription {
-  assetAdministrationShells: Array<AssetAdministrationShell>;
-  submodels: Array<Submodel>;
-  conceptDescriptions: Array<ConceptDescription>;
+  shells?: Array<AssetAdministrationShell>;
+  submodels?: Submodel[];
+  conceptDescriptions?: Array<ConceptDescription>;
 }

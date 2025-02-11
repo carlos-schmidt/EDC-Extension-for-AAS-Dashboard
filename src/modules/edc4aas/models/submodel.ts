@@ -1,28 +1,17 @@
-import { Identification } from './identification';
 import { IdsAssetElement } from './ids-asset-element';
-import { SubmodelElement } from './submodel-element';
+import { Properties } from './properties';
 
-export class Submodel extends IdsAssetElement {
-    private _idShort: string;
-    private _identification: Identification;
-    private _submodelElements: Array<SubmodelElement>;
+export class Submodel extends IdsAssetElement{
+    properties: Properties;
 
 
-    constructor(idsContractId: string, idsAssetElement: string, idShort: string, identification: Identification, submodelElements: Array<SubmodelElement>) {
-        super(idsContractId, idsAssetElement);
-        this._idShort = idShort;
-        this._identification = identification;
-        this._submodelElements = submodelElements;
+    constructor(properties: Properties, id: string) {
+        super(id);
+        this.properties = properties;
     }
 
-    public get idShort(): string {
-        return this._idShort;
-
-    } public get identification(): Identification {
-        return this._identification;
+    public get _properties(): Properties {
+        return this.properties;
     }
 
-    public get submodelElements(): Array<SubmodelElement> {
-        return this._submodelElements;
-    }
 }

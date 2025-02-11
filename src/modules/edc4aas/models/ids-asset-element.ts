@@ -1,17 +1,12 @@
 export class IdsAssetElement {
-    private _idsContractId: string;
-    private _idsAssetId: string;
+    id: string;
 
 
-    constructor(idsContractId: string, idsAssetId: string) {
-        this._idsContractId = idsContractId;
-        this._idsAssetId = idsAssetId;
-    }
-    public get idsContractId(): string {
-        return this._idsContractId;
+    constructor(idsAssetId: string) {
+        this.id = idsAssetId;
     }
 
-    public get idsAssetId(): string {
-        return this._idsAssetId;
+    public get _id(): string {
+        return this.id;
     }
 }

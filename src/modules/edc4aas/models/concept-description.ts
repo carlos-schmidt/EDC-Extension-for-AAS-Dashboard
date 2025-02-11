@@ -1,7 +1,7 @@
-import { Identification } from './identification';
 import { IdsAssetElement } from './ids-asset-element';
+import { Properties } from './properties';
 
-export interface ConceptDescription extends IdsAssetElement {
-  idShort: string;
-  identification: Identification;
+export interface ConceptDescription extends IdsAssetElement{
+  id: string;
+  properties: Properties;
 }

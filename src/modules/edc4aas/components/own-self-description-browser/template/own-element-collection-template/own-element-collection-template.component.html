@@ -1,19 +1,19 @@
 <mat-card class="aas-element-card">
   <div style="display:flex">
-    <info-view *ngIf="element?.value" [name]="'SubmodelElementCollection'" [element]="element"></info-view>
-    <info-view *ngIf="!element?.value" [name]="'SubmodelElement'" [element]="element"></info-view>
+    <info-view *ngIf="element?.properties?.value" [name]="'SubmodelElementCollection'" [element]="element"></info-view>
+    <info-view *ngIf="!element?.properties?.value" [name]="'SubmodelElement'" [element]="element"></info-view>
 
     <button class="right-aligned-button" (click)="editContract(idsContractId)"
       title="Edit contract associated with this element" mat-icon-button disabled
       matSuffix><mat-icon>edit</mat-icon></button>
   </div>
-  <div *ngIf="element?.value" class="aas-element-name" mat-line>
+  <div *ngIf="element?.properties?.value" class="aas-element-name" mat-line>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>Nested Submodel Elements ({{element?.value?.length}})</mat-panel-title>
+        <mat-panel-title>Nested Submodel Elements ({{element?.properties?.value?.length}})</mat-panel-title>
       </mat-expansion-panel-header>
-      <own-element-collection [element]="submodelElement" [idsContractId]="submodelElement?.idsContractId"
-        *ngFor="let submodelElement of element?.value"></own-element-collection>
+      <own-element-collection [element]="submodelElement" [idsContractId]="submodelElement?.id"
+        *ngFor="let submodelElement of element?.properties?.value || []"></own-element-collection>
     </mat-expansion-panel>
   </div>
 </mat-card>

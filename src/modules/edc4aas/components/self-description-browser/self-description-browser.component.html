@@ -31,12 +31,12 @@
               <mat-expansion-panel-header>
                 <mat-panel-title>Shells</mat-panel-title>
               </mat-expansion-panel-header>
-              <mat-card *ngFor="let assetAdministrationShell of selfDescription.assetAdministrationShells"
+              <mat-card *ngFor="let assetAdministrationShell of selfDescription.shells"
                 class="aas-element-card">
                 <div style="display: flex;">
 
                   <info-view [name]="'AssetAdministrationShell'" [element]="assetAdministrationShell"
-                    [id]="assetAdministrationShell.identification"></info-view>
+                    [id]="assetAdministrationShell.properties.id"></info-view>
                   <button class="right-aligned-button"
                     (click)="negotiateContract(assetAdministrationShell, selfDescriptionContainer.provider)"
                     title="Negotiate contract for this asset" mat-icon-button matSuffix>
@@ -52,7 +52,7 @@
               </mat-expansion-panel-header>
               <mat-card *ngFor="let submodel of selfDescription.submodels" class="aas-element-card">
                 <div style="display: flex;">
-                  <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.identification"></info-view>
+                  <info-view [name]="'Submodel'" [element]="submodel" [id]="submodel.properties.id"></info-view>
                   <button class="right-aligned-button"
                     (click)="negotiateContract(submodel, selfDescriptionContainer.provider)"
                     title="Negotiate contract for this asset" mat-icon-button matSuffix>
@@ -61,9 +61,9 @@
                 </div>
                 <mat-expansion-panel>
                   <mat-expansion-panel-header>
-                    <mat-panel-title>Submodel Elements ({{submodel.submodelElements?.length}})</mat-panel-title>
+                    <mat-panel-title>Submodel Elements ({{submodel.properties.submodelElements?.length}})</mat-panel-title>
                   </mat-expansion-panel-header>
-                  <element-collection *ngFor="let submodelElement of submodel.submodelElements"
+                  <element-collection *ngFor="let submodelElement of submodel.properties.submodelElements"
                     [element]="submodelElement" [provider]="selfDescriptionContainer.provider"></element-collection>
                 </mat-expansion-panel>
               </mat-card>
@@ -76,7 +76,7 @@
               <mat-card *ngFor="let conceptDescription of selfDescription.conceptDescriptions" class="aas-element-card">
                 <div style="display: flex;">
                   <info-view [name]="'ConceptDescription'" [element]="conceptDescription"
-                    [id]="conceptDescription.identification"></info-view>
+                    [id]="conceptDescription.properties.id"></info-view>
                   <button class="right-aligned-button"
                     (click)="negotiateContract(conceptDescription, selfDescriptionContainer.provider)"
                     title="Negotiate contract for this asset" mat-icon-button matSuffix>
