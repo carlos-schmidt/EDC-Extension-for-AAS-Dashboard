@@ -3,7 +3,7 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>EDC Demo</mat-toolbar>
+    <mat-toolbar>EDC Extension for AAS</mat-toolbar>
     <mat-nav-list>
       <ng-container *ngFor="let route of routes">
         <mat-toolbar *ngIf="route.data?.title === 'Publish AAS'">Provider</mat-toolbar>
@@ -19,6 +19,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
+
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -28,6 +29,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{titleService.getTitle()}}</span>
+      <span class="spacer"></span>
+      <img src="assets/fast.png" alt="Company Logo" style="height: 50px;" />
+      <img src="assets/logo.png" alt="Company Logo" style="height: 40px;" />
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
