@@ -13,10 +13,13 @@ export class PublishAASComponent {
   notFound: boolean = false;
   private provider: URL;
 
-  aasUrl: string = "http://";
+  aasUrl: string = "https://smt-repo.k8s.ilt-dmz.iosb.fraunhofer.de/api/v3.0";
+  aasRegistryUrl: string = "https://faaast-registry.k8s.ilt-dmz.iosb.fraunhofer.de/api/v3.0";
   aasPort: number = 8080;
   aasPath: string = "C:/festoDemoAAS.json";
   aasConfig: string = "";
+  username: string = "";
+  password: string = "";
 
   newestLog: string = new Date().toLocaleString() + ": ...";
   log: string = "";
@@ -28,7 +31,7 @@ export class PublishAASComponent {
 
   async registerAASByUrl() {
     var sanitized = this.aasUrl.toLowerCase().replace(" ", "%20");
-    var request = this.selfDescriptionRegistrationService.registerUrl(this.provider, new URL(sanitized));
+    var request = this.selfDescriptionRegistrationService.registerUrl(this.provider, new URL(sanitized), this.username, this.password);
     request.subscribe({
       next: _ => _,
       error: (e) => {
@@ -41,6 +44,22 @@ export class PublishAASComponent {
       }
     });
   }
+
+   async registerRegistryByUrl() {
+      var sanitized = this.aasRegistryUrl.toLowerCase().replace(" ", "%20");
+      var request = this.selfDescriptionRegistrationService.registerRegistryUrl(this.provider, new URL(sanitized));
+      request.subscribe({
+        next: _ => _,
+        error: (e) => {
+          console.error(e);
+          this.addLogMessage("Register Registry via URL: There was an error. Please check your EDC's output or the dashboard's configuration for details.");
+        },
+        complete: () => {
+          console.info('complete');
+          this.addLogMessage("Registered Registry via URL " + this.aasUrl);
+        }
+      });
+    }
 
   async registerAASByFile() {
     var sanitizedPath = this.aasPath.replace(/\\/g, "/");

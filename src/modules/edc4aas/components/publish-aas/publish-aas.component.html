@@ -1,7 +1,7 @@
 <div id="wrapper">
   <div>
     <div class="use-case-separator">
-      <b>Register a remote Asset Administration Shell service by its URL:</b><br><br>
+      <b>Register a remote Asset Administration Shell Repository by its URL:</b><br><br>
       <mat-form-field class="search-form-field" color="accent">
         <mat-label>URL</mat-label>
         <input [(ngModel)]="aasUrl" type="url" (keyup.enter)="registerAASByUrl()" matInput>
@@ -9,10 +9,28 @@
           <mat-icon>add</mat-icon>
         </button>
       </mat-form-field>
+      <mat-form-field class="search-form-field" color="accent">
+        <mat-label>Optional: Username</mat-label><input [(ngModel)]="username" matInput>
+      </mat-form-field>
+      <mat-form-field class="search-form-field" color="accent">
+        <mat-label>Optional: Password</mat-label><input [(ngModel)]="password" matInput>
+      </mat-form-field>
     </div>
     <div class="use-case-separator">
+      <b>Register a remote Asset Administration Shell Registry by its URL:</b><br><br>
+      <mat-form-field class="search-form-field" color="accent">
+        <mat-label>URL</mat-label>
+        <input [(ngModel)]="aasRegistryUrl" type="url" (keyup.enter)="registerRegistryByUrl()" matInput>
+        <button (click)="registerRegistryByUrl()" *ngIf="aasRegistryUrl" tooltip="Register" mat-icon-button matSuffix>
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
 
-      <b>Create an Asset Administration Shell service from within the EDC4AAS-Extension:</b><br><br>
+
+      <div class="use-case-separator">
+
+      <b>Create an Asset Administration Shell Repository from within the EDC4AAS-Extension:</b><br><br>
       <div style="display:flex;">
         <div>
           <mat-form-field class="search-form-field" color="accent">
@@ -25,17 +43,17 @@
           <br>
           <div>
             <mat-form-field class="number-form-field" color="accent">
-              <mat-label>AAS Service Port</mat-label><input [(ngModel)]="aasPort" type="number" min="0" max="65535"
+              <mat-label>AAS Repository Port</mat-label><input [(ngModel)]="aasPort" type="number" min="0" max="65535"
                 matInput>
             </mat-form-field>
             <button class="create-service-button" (click)="registerAASByFile()"
               *ngIf="aasPort && aasPath || aasConfig && aasPath" mat-raised-button>
-              Create Service
+              Create Repository
             </button>
           </div>
         </div>
       </div>
-      Note: To create an AAS service, either a path to a FA³ST configuration file or an HTTP port must be provided.
+      Note: To create an AAS Repository, either a path to a FA³ST configuration file or an HTTP port must be provided.
     </div>
   </div>
   <div class="message-log">

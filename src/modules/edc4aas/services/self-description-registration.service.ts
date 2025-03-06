@@ -16,12 +16,35 @@ export class SelfDescriptionRegistrationService {
   *
   * @param edcUrl Clean URL of EDC (only protocol://hostname:port)
   * @param aasUrl Base URL of the AAS Service to be added
+  * @param username username of basic auth
+  * @param password password of basic auth
   * @returns HTTP POST response
   */
-  public registerUrl(edcUrl: URL, aasUrl: URL) {
+  public registerUrl(edcUrl: URL, aasUrl: URL, username: string, password: string) {
     var requestUrl = edcUrl + "/service?url=" + aasUrl;
-    return this.httpClient.post(requestUrl, null, { responseType: 'text' });
+        if (username != "" && password != "") {
+           const json = {
+                type: "basic",
+                username: username,
+                password: password
+              };
+          return this.httpClient.post(requestUrl, json, { responseType: 'text' });
+        } else {
+           return this.httpClient.post(requestUrl, null, { responseType: 'text' });
+        }
   }
+
+   /**
+    * Register a standalone AAS Registry (e.g., FA³ST) at the EDC.
+    *
+    * @param edcUrl Clean URL of EDC (only protocol://hostname:port)
+    * @param aasUrl Base URL of the AAS Registry to be added
+    * @returns HTTP POST response
+    */
+    public registerRegistryUrl(edcUrl: URL, aasUrl: URL) {
+      var requestUrl = edcUrl + "/registry?url=" + aasUrl;
+      return this.httpClient.post(requestUrl, null, { responseType: 'text' });
+    }
 
   /**
    * Register an AAS service the EDC using an environment file.

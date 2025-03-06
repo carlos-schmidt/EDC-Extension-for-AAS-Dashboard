@@ -34,21 +34,21 @@ export const routes: Routes = [
   //   component: TransferHistoryViewerComponent,
   //   data: { title: 'Transfer History', icon: 'assignment' }
   // },
-  {
-    path: 'contract-definitions',
-    component: ContractDefinitionViewerComponent,
-    data: { title: 'Contract Definitions', icon: 'rule' }
-  },
-  {
-    path: 'policies',
-    component: PolicyViewComponent,
-    data: { title: 'Policies', icon: 'policy' }
-  },
-  {
-    path: 'my-assets', // must not be "assets" to prevent conflict with assets directory
-    component: AssetViewerComponent,
-    data: { title: 'Assets', icon: 'upload' }
-  },
+//   {
+//     path: 'contract-definitions',
+//     component: ContractDefinitionViewerComponent,
+//     data: { title: 'Contract Definitions', icon: 'rule' }
+//   },
+//   {
+//     path: 'policies',
+//     component: PolicyViewComponent,
+//     data: { title: 'Policies', icon: 'policy' }
+//   },
+//   {
+//     path: 'my-assets', // must not be "assets" to prevent conflict with assets directory
+//     component: AssetViewerComponent,
+//     data: { title: 'Assets', icon: 'upload' }
+//   },
   {
     path: 'publish-aas',
     component: PublishAASComponent,

@@ -6,6 +6,7 @@
             The Eclipse Dataspace Connector provides a framework for sovereign, inter-organizational data exchange.
             It implements the International Data Spaces standard (IDS) as well as relevant protocols associated with GAIA-X.
             The connector is designed in an extensible way in order to support alternative protocols and integrate in various ecosystems.
+            One such extension is the EDC Extension for AAS, allowing to share and retrieve AAS data.
         </p>
         <p>
           <a class="link" color="secondary" href="https://github.com/eclipse-dataspaceconnector/DataSpaceConnector"
@@ -23,26 +24,25 @@
              href="https://github.com/FraunhoferIOSB/EDC-Extension-for-AAS/tree/main/example/README.md"
              mat-stroked-button
              target="_blank">
-            Onboarding Guide
+            Onboarding Guide AAS
           </a>
         </p>
     </div>
 </mat-card>
 
 <mat-card>
-    <h1>EDC Data Dashboard (this application)</h1>
+    <h1>EDC Dashboard</h1>
     <div>
         <p class="description">
-          This EDC Data Dashboard is a developer UI for the EDC Management API.
-          This application is not intended for production usage and can be used to showcase EDC from a technical perspective, as the UI
-          is designed as a 1-1 mapping of the Management API.
+          This EDC  Dashboard is a developer UI for the EDC Extension for AAS.
+          This application is not intended for production usage and can be used to showcase EDC and the AAS Extension in Demos.
         </p>
       <p>
         <a class="link" color="secondary"
            href="https://app.swaggerhub.com/apis/eclipse-edc-bot/management-api"
            mat-stroked-button
            target="_blank">
-          Management API
+          EDC Management API
         </a>
       </p>
       <p class="description">
@@ -54,9 +54,9 @@
         <li>View your existing contracts in the <a [routerLink]="['/contracts']">Contracts</a> page</li>
         <li>Transfer an asset in your Dataspace using the <a [routerLink]="['/contracts']">Contracts</a> page</li>
         <li>View which assets have been transferred in your Dataspace in the <a [routerLink]="['/transfer-history']">Transfer History</a> page</li> -->
-        <li>View and create assets using the <a [routerLink]="['/my-assets']">Assets</a> page</li>
-        <li>View and create policies and apply these to assets in your Dataspace using the <a [routerLink]="['/policies']">Policies</a> page</li>
-        <li>Publish a new asset into your Dataspace using the <a [routerLink]="['/contract-definitions']">Contract Definitions</a> page</li>
+        <li>Share / publish AAS Repositories or Registries</li>
+        <li>Browse AAS / Submodels from EDC Providers</li>
+        <li>Automate negotiation and retrieve an AAS / Submodel</li>
       </ul>
     </div>
 </mat-card>
