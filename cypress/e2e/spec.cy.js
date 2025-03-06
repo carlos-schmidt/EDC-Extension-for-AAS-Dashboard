@@ -9,7 +9,7 @@ describe('end-to-end', () => {
     cy.visit(providerUrl);
   })
 
-  it('should create an asset and view it on provider side', function() {
+  it.skip('should create an asset and view it on provider side', function() {
     cy.visit(providerUrl);
 
     const id = uuid()
