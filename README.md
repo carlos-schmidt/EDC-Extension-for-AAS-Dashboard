@@ -17,6 +17,13 @@ npm install
 npm run start
 ```
 
+To start the Dashboard with Docker:
+```
+docker run -p 4200:80 fraunhoferiosb/edc-extension4aas-dashboard:latest
+```
+
+It is also part of the EDC Extension for AAS example docker-compose file.
+
 Also, the default x-api-key of the extension should be set as `password`
 **Please note: This repository does not contain production-grade code and is only intended for demonstration purposes.**
 
