@@ -18,7 +18,7 @@ export class ClientService {
     requestUrl.searchParams.append("providerUrl", provider.toString());
     requestUrl.searchParams.append("assetId", assetId);
     if (destination)
-      requestUrl.searchParams.append("provider", destination.toString());
+      requestUrl.searchParams.append("providerId", destination.toString());
 
     return this.httpClient.post<JSON>(requestUrl.toString(), null);
   }
