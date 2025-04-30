@@ -33,9 +33,10 @@ export class ClientPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.providerUrl = new URL(params['2']);
+      this.providerUrl = "http://provider:8282"
       this.providerUrl = new URL(this.providerUrl?.origin + "/dsp");
       this.assetId = params['1'];
+      this.destinationUrl = "provider"
       this.addLogMessage("Initialized with URL " + this.providerUrl + ", asset " + this.assetId);
     });
   }
